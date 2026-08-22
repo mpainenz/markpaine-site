@@ -16,14 +16,12 @@ const personJsonLd = {
 
 export default function About() {
   return (
-    <main style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <main className="fill-main centered" style={{ gap: 20 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
 
       <div style={{ display: 'flex', gap: 36, alignItems: 'center', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15 }}>
-          <h1 style={{ fontSize: 46, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-            {site.name}
-          </h1>
+          <h1 className="hero-name">{site.name}</h1>
           <p style={{ fontSize: 15.5, color: 'var(--text-soft)', maxWidth: '40ch', margin: 0 }}>{site.byline}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
             {site.keywords.map((row, i) => (
@@ -48,15 +46,12 @@ export default function About() {
             </Link>
           </div>
         </div>
-        <div
-          className="panel"
-          style={{ width: 270, height: 330, flexShrink: 0, overflow: 'hidden', borderRadius: 14, position: 'relative' }}
-        >
+        <div className="panel headshot-card">
           <Image src="/headshot.jpg" alt={site.name} fill style={{ objectFit: 'cover' }} priority />
         </div>
       </div>
 
-      <div className="panel mono" style={{ padding: '16px 20px', fontSize: 12.5, lineHeight: 1.75, color: 'var(--text-soft)', overflowX: 'auto' }}>
+      <div className="panel whoami">
         <div className="prompt-line">$ whoami --verbose</div>
         <div style={{ whiteSpace: 'pre' }}>
           {'Current:   Platform Engineer / SRE @ House of Doge  (Dogecoin payment infrastructure)\n'}

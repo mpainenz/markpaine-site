@@ -6,11 +6,9 @@ export const metadata: Metadata = { title: 'Contact' };
 
 export default function Contact() {
   return (
-    <main style={{ display: 'flex', flexDirection: 'column', gap: 24, minHeight: '60vh' }}>
+    <main className="fill-main" style={{ gap: 24 }}>
       <div className="prompt-line mono">$ mark --contact</div>
-      <h1 style={{ fontSize: 34, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
-        Interesting problem? Let&apos;s talk.
-      </h1>
+      <h1 className="page-title">Interesting problem? Let&apos;s talk.</h1>
       <CopyEmail email={site.email} />
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <a href={site.github} className="btn btn-plain" target="_blank" rel="noopener noreferrer">

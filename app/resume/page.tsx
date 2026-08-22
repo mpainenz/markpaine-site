@@ -24,7 +24,7 @@ export default function Resume() {
       </div>
 
       <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <h1 style={{ fontSize: 34, fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>Resume</h1>
+        <h1 className="page-title">Resume</h1>
         <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
           {site.keywords[0].join(' · ')}
           <br />
