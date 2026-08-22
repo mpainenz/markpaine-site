@@ -1,0 +1,76 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  IMAGE: ghcr.io/mpainenz/markpaine-site
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Render CV PDF from print stylesheet
+        run: npm run pdf
+
+      - name: Upload CV artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mark-Paine-CV
+          path: out/Mark-Paine-CV.pdf
+
+      - name: Log in to GHCR
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+
+      - name: Bump image tag in GitOps repo
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GITOPS_TOKEN: ${{ secrets.SOLUS_GITOPS_TOKEN }}
+        run: |
+          if [ -z "$GITOPS_TOKEN" ]; then
+            echo "::warning::SOLUS_GITOPS_TOKEN not set — skipping GitOps bump. Image pushed as ${IMAGE}:${GITHUB_SHA}."
+            exit 0
+          fi
+          git clone --depth 1 "https://x-access-token:${GITOPS_TOKEN}@github.com/mpainenz/solus.git" gitops
+          cd gitops/argocd/tortoise/apps/markpaine-site/deployment
+          sed -i "s|newTag: .*|newTag: ${GITHUB_SHA}|" kustomization.yaml
+          git config user.name "markpaine-site-ci"
+          git config user.email "ci@markpaine-site"
+          git commit -am "markpaine-site: deploy ${GITHUB_SHA}"
+          git push
