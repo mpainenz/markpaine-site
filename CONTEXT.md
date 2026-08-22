@@ -9,5 +9,5 @@ Glossary for markpaine-site. Terms only — implementation lives in `docs/adr/`.
 | **Print letterhead** | The name/byline/contact block that exists only in print — on screen that identity lives in the nav and About page. |
 | **Island** | A client-side interactive component (theme toggle, copy-email) in an otherwise static page. |
 | **GitOps bump** | CI committing a new image tag into the private `solus` repo, which ArgoCD watches. The bump *is* the deploy. |
-| **Origin host** | The Cloudflare-bypassing hostname pattern (`*-origin.*`) used on Traefik, mirroring the tensorrelay.com setup. |
+| **Origin host** | The `*-origin.*` hostname a CloudFront distribution points at — the direct-to-Traefik address behind the CDN, mirroring the tensorrelay.com setup. |
 | **Earlier roles** | WXC and iHug — shown as one-line tombstones, not full cards. |

@@ -6,7 +6,8 @@ Status: accepted
 ## Context
 
 A personal CV site with three pages, a downloadable CV, and hosting on a
-private home Kubernetes cluster (Traefik + ArgoCD, Cloudflare-fronted). The
+private home Kubernetes cluster (Traefik + ArgoCD, fronted by Route 53 +
+CloudFront in the same pattern as the cluster's other public services). The
 CV was previously a Word document maintained separately from any web presence,
 and the two drifted.
 
