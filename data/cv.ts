@@ -1,6 +1,6 @@
 export const site = {
   name: 'Mark Paine',
-  domain: 'markpaine.dev', // placeholder until the domain is registered
+  domain: 'markpaine.dev',
   byline:
     'Multi-cloud platform engineering on Docker and Kubernetes, with a focus on carrier-grade reliability - currently building cryptocurrency payment and tokenization infrastructure.',
   location: 'Auckland, New Zealand',
