@@ -55,10 +55,17 @@ export default function Resume() {
             </div>
           </article>
         ))}
-        <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', fontSize: 12.5, color: 'var(--faint)', padding: '0 4px' }}>
+        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           {earlierRoles.map((r) => (
-            <div key={r.company}>
-              <span style={{ color: 'var(--text-soft)', fontWeight: 600 }}>{r.company}</span> · {r.role}
+            <div
+              key={r.company}
+              className="panel"
+              style={{ flex: '1 1 300px', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}
+            >
+              <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--text-soft)' }}>
+                {r.company} <span style={{ color: 'var(--faint)', fontWeight: 400 }}>· {r.role}</span>
+              </div>
+              <div className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>{r.meta}</div>
             </div>
           ))}
         </div>

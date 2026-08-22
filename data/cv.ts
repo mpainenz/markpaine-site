@@ -67,8 +67,8 @@ export const experience: Job[] = [
 ];
 
 export const earlierRoles = [
-  { company: 'WorldxChange (WXC)', role: 'Developer' },
-  { company: 'iHug', role: 'Support / Developer' },
+  { company: 'WXC Communications', role: 'Technical Support', meta: '2004 — 05' },
+  { company: 'iHug', role: 'Customer Services', meta: '2003 — 04' },
 ];
 
 export const skills: { group: string; items: string }[] = [

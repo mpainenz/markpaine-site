@@ -91,7 +91,7 @@ a:hover {
   flex-direction: column;
 }
 .fill-main.centered {
-  justify-content: center;
+  padding-top: clamp(8px, 8vh, 96px);
 }
 
 .hero-name {
@@ -108,8 +108,8 @@ a:hover {
   margin: 0;
 }
 .headshot-card {
-  width: 270px;
-  height: 330px;
+  width: 235px;
+  height: 287px;
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 14px;
@@ -117,14 +117,14 @@ a:hover {
 }
 @media (min-width: 1440px) {
   .headshot-card {
-    width: 310px;
-    height: 379px;
+    width: 265px;
+    height: 324px;
   }
 }
 @media (min-width: 1920px) {
   .headshot-card {
-    width: 340px;
-    height: 415px;
+    width: 290px;
+    height: 354px;
   }
 }
 
