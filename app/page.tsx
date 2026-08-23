@@ -19,8 +19,8 @@ export default function About() {
     <main className="fill-main centered" style={{ gap: 20 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
 
-      <div style={{ display: 'flex', gap: 36, alignItems: 'center', flexWrap: 'wrap' }}>
-        <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15 }}>
+      <div style={{ display: 'flex', gap: 36, alignItems: 'stretch', flexWrap: 'wrap' }}>
+        <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15, justifyContent: 'space-between' }}>
           <h1 className="hero-name">{site.name}</h1>
           <p style={{ fontSize: 15.5, color: 'var(--text-soft)', maxWidth: '40ch', margin: 0 }}>{site.byline}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -57,12 +57,13 @@ export default function About() {
       </div>
 
       <div className="panel whoami">
-        <div className="prompt-line">$ whoami --verbose</div>
+        <div className="prompt-line">
+          $ whoami --verbose<span className="cursor" style={{ marginLeft: 6 }} />
+        </div>
         <div style={{ whiteSpace: 'pre' }}>
           {'Current:   Platform Engineer / SRE @ House of Doge  (Dogecoin payment infrastructure)\n'}
           {'Founder:   Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale\n'}
-          {'History:   20y telecom-grade backend @ One New Zealand '}
-          <span className="cursor" />
+          {'History:   20y telecom-grade backend @ One New Zealand'}
         </div>
       </div>
     </main>

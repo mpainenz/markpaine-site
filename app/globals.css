@@ -516,27 +516,28 @@ a.pill:focus-visible {
   .print-letterhead {
     display: flex;
     flex-direction: column;
-    gap: 4pt;
-    padding-bottom: 10pt;
+    gap: 5pt;
+    background: #0d1420;
+    border-radius: 8pt;
+    padding: 16pt 18pt;
+    margin-bottom: 6pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
   .print-letterhead .name {
     font-size: 22pt;
     font-weight: 700;
     letter-spacing: -0.02em;
+    color: #ffffff;
   }
   .print-letterhead .byline {
     font-size: 10pt;
-    color: #33415c;
+    color: #b9c6da;
   }
   .print-letterhead .contact {
     font-size: 8.5pt;
-    color: #6b7280;
+    color: #8fa0b8;
     font-family: ui-monospace, Menlo, Consolas, monospace;
-  }
-  .print-letterhead .keywords {
-    font-size: 8.5pt;
-    color: #33415c;
-    letter-spacing: 0.02em;
   }
 
   .print-section-heading {

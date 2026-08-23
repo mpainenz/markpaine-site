@@ -16,8 +16,8 @@ export default function CopyEmail({ email }: { email: string }) {
   };
 
   return (
-    <button className="btn btn-accent mono" onClick={copy} style={{ fontSize: 13.5 }}>
-      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <button className="btn btn-accent btn-beam mono" onClick={copy} style={{ fontSize: 13.5 }}>
+      <svg className="btn-icon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="1.5" y="3" width="13" height="10" rx="1.5" />
         <path d="M2 4l6 5 6-5" />
       </svg>

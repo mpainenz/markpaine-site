@@ -20,25 +20,27 @@ export default function Resume() {
         </div>
       </div>
 
-      <header className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 20, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
           <h1 className="page-title">Resume</h1>
-          <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
-            {site.keywords[0].join(' · ')}
-            <br />
-            {site.keywords[1].join(' · ')}
-          </div>
+          <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam">
+            <svg className="btn-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
+            </svg>
+            Download CV
+          </a>
         </div>
-        <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam" style={{ marginTop: 6 }}>
-          <svg className="btn-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
-          </svg>
-          Download CV
-        </a>
+        <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
+          {site.keywords[0].join(' · ')}
+          <br />
+          {site.keywords[1].join(' · ')}
+        </div>
       </header>
 
       <section style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-        <div className="prompt-line mono">$ cat experience.log</div>
+        <div className="prompt-line mono">
+          $ cat experience.log<span className="cursor" style={{ marginLeft: 6 }} />
+        </div>
         <div className="print-only print-section-heading">EXPERIENCE</div>
         {experience.map((job) => (
           <article key={job.company} className="panel job-card">

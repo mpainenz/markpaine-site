@@ -24,8 +24,8 @@ const iconInstagram = (
 
 export default function Contact() {
   return (
-    <main className="fill-main" style={{ gap: 0 }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18, flexGrow: 1, justifyContent: 'center', maxWidth: '56ch' }}>
+    <main className="fill-main centered" style={{ gap: 0 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 18, flexGrow: 1 }}>
         <div className="prompt-line mono" style={{ fontSize: 13.5 }}>
           $ mark --contact
           <span className="cursor" />
@@ -35,35 +35,23 @@ export default function Contact() {
           <br />
           Let&apos;s talk.
         </h1>
-        <p style={{ fontSize: 15, color: 'var(--muted)', margin: 0 }}>
+        <p style={{ fontSize: 15, color: 'var(--muted)', margin: 0, maxWidth: '56ch' }}>
           Based in Auckland, New Zealand — comfortable remote across timezones.
         </p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 4 }}>
           <CopyEmail email={site.email} />
-          <a href={site.github} className="btn btn-plain" target="_blank" rel="noopener noreferrer">
+          <a href={site.github} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
             {iconGitHub} GitHub
           </a>
-          <a href={site.linkedin} className="btn btn-plain" target="_blank" rel="noopener noreferrer">
+          <a href={site.linkedin} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
             {iconLinkedIn} LinkedIn
           </a>
-          <a href={site.instagram} className="btn btn-plain" target="_blank" rel="noopener noreferrer">
+          <a href={site.instagram} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
             {iconInstagram} Instagram
           </a>
         </div>
         <div style={{ fontSize: 12, color: 'var(--faint)' }}>The email button copies the address to your clipboard.</div>
       </div>
-      <footer
-        className="site-footer"
-        style={{ borderTop: '1px solid var(--border)', paddingTop: 16, display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', fontSize: 12, color: 'var(--faint)' }}
-      >
-        <span>Mark Paine · Auckland, NZ</span>
-        <span className="mono">
-          built by hand ·{' '}
-          <a href={site.repo} target="_blank" rel="noopener noreferrer">
-            deployed from a public repo
-          </a>
-        </span>
-      </footer>
     </main>
   );
 }
