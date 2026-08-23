@@ -89,8 +89,8 @@ export const earlierRoles = [
 export const skills: { group: string; items: string }[] = [
   { group: 'Cloud', items: 'Multi-Cloud: AWS · GCP · Azure' },
   { group: 'Platform', items: 'Linux · Kubernetes · Linkerd · Tailscale · Docker' },
-  { group: 'Languages', items: 'Go · Rust · Python · C# · C++ · Java · Kotlin · Delphi · PHP · TypeScript · JavaScript' },
-  { group: 'Web', items: 'React · HTML · CSS' },
+  { group: 'Languages', items: 'Go · Rust · Python · C# · C++ · Java · Kotlin · Delphi' },
+  { group: 'Web', items: 'React · HTML · CSS · JavaScript · TypeScript · PHP' },
   { group: 'Infrastructure as Code', items: 'Terraform · Pulumi · CDK' },
   { group: 'CI/CD', items: 'GitHub Actions · GitLabs · ArgoCD' },
   { group: 'Observability', items: 'OpenTelemetry · Prometheus · Grafana · Loki · Sentry' },
