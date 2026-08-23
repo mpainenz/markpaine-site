@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { site, experience, earlierRoles, skills, education } from '@/data/cv';
 
 export const metadata: Metadata = { title: 'Resume' };
@@ -132,6 +133,19 @@ export default function Resume() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div className="prompt-line mono">
+          $ cat references.txt<span className="cursor" style={{ marginLeft: 6 }} />
+        </div>
+        <div className="panel no-print mono" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
+          <div style={{ color: '#E0806E' }}>cat: references.txt: Permission denied</div>
+          <div style={{ color: 'var(--faint)' }}>
+            # references are available on request — <Link href="/contact/">mark --contact</Link>
+          </div>
+        </div>
+        <div className="print-only" style={{ fontSize: '10pt', color: '#444b55' }}>References available on request.</div>
       </section>
     </main>
   );

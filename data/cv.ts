@@ -95,7 +95,7 @@ export const skills: { group: string; items: string }[] = [
   { group: 'Observability', items: 'OpenTelemetry · Prometheus · Grafana · Loki · Sentry' },
   { group: 'Agentic AI', items: 'Cursor · Codex · Claude Code · LangGraph' },
   { group: 'Databases', items: 'ClickHouse · Postgres · MSSQL' },
-  { group: 'ML / Data Science', items: 'Linear Regression · Pandas · NumPy · Jupyter' },
+  { group: 'ML / Data Science', items: 'Linear Regression · scikit-learn · Pandas · NumPy · Jupyter' },
 ];
 
 export const education = [
