@@ -20,13 +20,21 @@ export default function Resume() {
         </div>
       </div>
 
-      <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <h1 className="page-title">Resume</h1>
-        <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
-          {site.keywords[0].join(' · ')}
-          <br />
-          {site.keywords[1].join(' · ')}
+      <header className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 20, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <h1 className="page-title">Resume</h1>
+          <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
+            {site.keywords[0].join(' · ')}
+            <br />
+            {site.keywords[1].join(' · ')}
+          </div>
         </div>
+        <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam" style={{ marginTop: 6 }}>
+          <svg className="btn-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
+          </svg>
+          Download CV
+        </a>
       </header>
 
       <section style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -38,16 +46,18 @@ export default function Resume() {
               <div className="job-title">
                 {job.company} <span className="job-role">· {job.role}</span>
               </div>
-              <div className="job-meta">
-                {job.current && (
-                  <>
-                    <span className="current-dot" aria-hidden="true"></span>
-                    <span style={{ color: 'var(--accent)' }}>current</span>
-                    {' · '}
-                  </>
-                )}
-                {job.meta}
-              </div>
+              {(job.meta || job.current) && (
+                <div className="job-meta">
+                  {job.meta}
+                  {job.current && (
+                    <>
+                      {' '}
+                      <span className="current-dot" aria-hidden="true"></span>
+                      <span style={{ color: 'var(--accent)' }}>Current</span>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
             {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
             {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}

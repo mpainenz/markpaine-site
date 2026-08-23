@@ -16,8 +16,16 @@ export default function CopyEmail({ email }: { email: string }) {
   };
 
   return (
-    <button className="btn btn-accent mono" onClick={copy} style={{ alignSelf: 'flex-start', fontSize: 13.5 }}>
+    <button className="btn btn-accent mono" onClick={copy} style={{ fontSize: 13.5 }}>
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="1.5" y="3" width="13" height="10" rx="1.5" />
+        <path d="M2 4l6 5 6-5" />
+      </svg>
       {copied ? 'copied ✓' : email}
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="var(--faint)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" />
+        <path d="M10.5 5.5v-2a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2" />
+      </svg>
     </button>
   );
 }

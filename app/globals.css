@@ -479,7 +479,8 @@ a.pill:focus-visible {
 
   .no-print,
   .nav,
-  .site-footer {
+  .site-footer,
+  .current-dot {
     display: none !important;
   }
   .print-only {

@@ -69,7 +69,7 @@ export const experience: Job[] = [
   {
     company: 'Solus Designs Limited',
     role: 'Founder',
-    meta: '2025 —',
+    meta: '',
     blurb:
       'Solus Designs is my independent product company — software products designed, built, and shipped end to end.',
     bullets: [
@@ -85,7 +85,7 @@ export const earlierRoles = [
 ];
 
 export const skills: { group: string; items: string }[] = [
-  { group: 'Languages', items: 'GoLang · Rust · Python · C# (.NET) · SQL · TypeScript' },
+  { group: 'Languages', items: 'Go · Rust · Python · C# (.NET) · SQL · TypeScript' },
   { group: 'Cloud', items: 'Multi-cloud: AWS · GCP · Azure' },
   { group: 'Platform', items: 'Linux · Kubernetes · Linkerd · Tailscale · Docker' },
   { group: 'Infrastructure as Code', items: 'Terraform · Pulumi · CDK' },
