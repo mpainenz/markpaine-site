@@ -46,7 +46,7 @@ export default function About() {
             </Link>
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
+        <div className="hero-media" style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
           <div className="panel headshot-card">
             <Image src="/headshot.jpg" alt={site.name} fill style={{ objectFit: 'cover' }} priority />
           </div>
@@ -60,10 +60,13 @@ export default function About() {
         <div className="prompt-line">
           $ whoami --verbose<span className="cursor" style={{ marginLeft: 6 }} />
         </div>
-        <div className="whoami-body" style={{ whiteSpace: 'pre' }}>
-          {'Current:   Platform Engineer / SRE @ House of Doge  (Dogecoin payment infrastructure)\n'}
-          {'Founder:   Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale\n'}
-          {'History:   20y telecom-grade backend @ One New Zealand'}
+        <div className="whoami-body">
+          <span className="k">Current:</span>
+          <span className="v">Platform Engineer / SRE @ House of Doge&nbsp;&nbsp;(Dogecoin payment infrastructure)</span>
+          <span className="k">Founder:</span>
+          <span className="v">Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale</span>
+          <span className="k">History:</span>
+          <span className="v">20y telecom-grade backend @ One New Zealand</span>
         </div>
       </div>
     </main>

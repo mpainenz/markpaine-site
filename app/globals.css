@@ -89,22 +89,46 @@ a:hover {
   .fill-main.centered {
     padding-top: 12px;
   }
-  /* Pills: one flowing wrap group instead of two enforced rows */
+  /* Pills: one flowing wrap group instead of two enforced rows
+     (!important needed — the rows carry inline display:flex) */
   .pill-rows {
     flex-direction: row !important;
     flex-wrap: wrap;
   }
   .pill-rows > div {
-    display: contents;
+    display: contents !important;
   }
   /* whoami wraps instead of scrolling */
   .whoami {
     overflow-x: visible;
   }
-  .whoami-body {
-    white-space: pre-wrap !important;
-    word-break: break-word;
+  /* Portrait fills the screen width on mobile */
+  .hero-media {
+    width: 100%;
   }
+  .hero-media .headshot-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 235 / 287;
+  }
+  .whoami .whoami-body {
+    row-gap: 12px;
+  }
+}
+
+/* whoami label/value grid (all sizes; mobile adds row gaps above) */
+.whoami-body {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 2ch;
+  row-gap: 2px;
+  margin-top: 4px;
+}
+.whoami-body .k {
+  color: var(--faint);
+}
+.whoami-body .v {
+  overflow-wrap: anywhere;
 }
 
 /* Vertically center the About hero in tall viewports; push footers to the bottom */

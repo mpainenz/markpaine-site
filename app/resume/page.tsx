@@ -23,8 +23,8 @@ export default function Resume() {
       <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
           <h1 className="page-title">Resume</h1>
-          <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam">
-            <svg className="btn-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+          <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam" style={{ padding: '8px 14px', fontSize: 13 }}>
+            <svg className="btn-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
             </svg>
             Download CV
