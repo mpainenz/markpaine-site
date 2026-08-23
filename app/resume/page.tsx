@@ -43,7 +43,7 @@ export default function Resume() {
         </div>
         <div className="print-only print-section-heading">EXPERIENCE</div>
         {experience.map((job) => (
-          <article key={job.company} className="panel job-card">
+          <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
             <div className="job-head">
               <div className="job-title">
                 {job.company} <span className="job-role">· {job.role}</span>
@@ -73,7 +73,7 @@ export default function Resume() {
             </div>
           </article>
         ))}
-        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+        <div className="tombstones" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           {earlierRoles.map((r) => (
             <div
               key={r.company}

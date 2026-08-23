@@ -443,7 +443,9 @@ a.pill:focus-visible {
 /* --- print: the CV PDF ------------------------------------------------- */
 @page {
   size: A4;
-  margin: 16mm 14mm;
+  /* Zero page margins so the letterhead band can bleed to the paper edge (H2);
+     content spacing is handled by .page padding in the print block below. */
+  margin: 0;
 }
 
 .print-only {
@@ -489,9 +491,16 @@ a.pill:focus-visible {
 
   .page {
     max-width: none;
-    padding: 0;
+    padding: 0 53px 50px;
     min-height: 0;
     display: block;
+  }
+  .print-break {
+    break-before: page;
+    padding-top: 44px;
+  }
+  .tombstones > div {
+    flex: 1 1 100%;
   }
   .panel {
     border: none;
@@ -518,9 +527,9 @@ a.pill:focus-visible {
     flex-direction: column;
     gap: 5pt;
     background: #0d1420;
-    border-radius: 8pt;
-    padding: 16pt 18pt;
-    margin-bottom: 6pt;
+    border-radius: 0;
+    padding: 44px 53px 26px;
+    margin: 0 -53px 16pt;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

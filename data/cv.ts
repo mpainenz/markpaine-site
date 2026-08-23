@@ -31,6 +31,7 @@ export type Job = {
   role: string;
   meta: string;
   current?: boolean;
+  printBreak?: boolean;
   blurb?: string;
   intro?: string;
   bullets: string[];
@@ -70,6 +71,7 @@ export const experience: Job[] = [
     company: 'Solus Designs Limited',
     role: 'Founder',
     meta: '',
+    printBreak: true,
     blurb:
       'Solus Designs is my independent product company — software products designed, built, and shipped end to end.',
     bullets: [
