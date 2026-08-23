@@ -289,6 +289,12 @@ a.pill:focus-visible {
   .spin-line::after {
     animation: none;
   }
+  .btn-accent,
+  .btn-accent::after,
+  .btn-accent .btn-icon {
+    transition: none;
+    transform: none;
+  }
   .btn-beam:hover::before,
   .btn-beam:focus-visible::before {
     animation: none;
@@ -311,10 +317,39 @@ a.pill:focus-visible {
   border: 1px solid var(--accent);
   color: var(--accent);
   font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.25s ease;
 }
-.btn-accent:hover {
+.btn-accent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, color-mix(in oklab, var(--accent) 30%, transparent) 50%, transparent 58%);
+  transform: translateX(-130%);
+}
+.btn-accent:hover,
+.btn-accent:focus-visible {
   color: var(--accent-bright);
   border-color: var(--accent-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px -6px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+.btn-accent:hover::after,
+.btn-accent:focus-visible::after {
+  transform: translateX(130%);
+  transition: transform 0.55s ease;
+}
+.btn-accent:active {
+  transform: translateY(0) scale(0.98);
+}
+.btn-accent .btn-icon {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-accent:hover .btn-icon,
+.btn-accent:focus-visible .btn-icon {
+  transform: translateY(2px);
 }
 .btn-plain {
   border: 1px solid var(--border-strong);
