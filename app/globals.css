@@ -129,6 +129,7 @@ a:hover {
 }
 
 .whoami {
+  margin-top: 16px; /* 1B: 36px total above the strip with the hero's 20px gap */
   padding: 16px 20px;
   font-family: ui-monospace, Menlo, Consolas, monospace;
   font-size: 12.5px;
@@ -207,6 +208,93 @@ a:hover {
   padding: 5px 12px;
   font-size: 12px;
   white-space: nowrap;
+}
+
+/* Pill links: selection-sweep hover (accent fills left→right like terminal text selection) */
+a.pill {
+  color: var(--pill-text);
+  background-image: linear-gradient(
+    color-mix(in oklab, var(--accent) 14%, transparent),
+    color-mix(in oklab, var(--accent) 14%, transparent)
+  );
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size 0.22s ease-out, color 0.22s, border-color 0.22s;
+}
+a.pill:hover,
+a.pill:focus-visible {
+  background-size: 100% 100%;
+  color: var(--accent);
+  border-color: color-mix(in oklab, var(--accent) 45%, transparent);
+}
+
+/* Status line under the portrait, S1 line spinner */
+.status-line {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  color: var(--muted);
+  text-align: right;
+}
+.status-line .val {
+  color: var(--accent);
+}
+.spin-line::after {
+  content: "-";
+  display: inline-block;
+  width: 1ch;
+  text-align: left;
+  color: var(--accent);
+  animation: spin-line 0.52s steps(1) infinite;
+}
+@keyframes spin-line {
+  0% { content: "-"; }
+  25% { content: "\\"; }
+  50% { content: "|"; }
+  75% { content: "/"; }
+}
+
+/* View resume: 3px border beam orbits on hover */
+@property --beam {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.btn-beam {
+  position: relative;
+}
+.btn-beam::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 8px;
+  padding: 3px;
+  background: conic-gradient(from var(--beam), transparent 0deg 300deg, var(--accent) 340deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.btn-beam:hover::before,
+.btn-beam:focus-visible::before {
+  opacity: 1;
+  animation: beam-orbit 2.2s linear infinite;
+}
+@keyframes beam-orbit {
+  to { --beam: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-line::after {
+    animation: none;
+  }
+  .btn-beam:hover::before,
+  .btn-beam:focus-visible::before {
+    animation: none;
+    opacity: 1;
+    background: color-mix(in oklab, var(--accent) 50%, transparent);
+  }
 }
 .btn {
   display: inline-flex;

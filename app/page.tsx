@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { site } from '@/data/cv';
+import { site, keywordLinks } from '@/data/cv';
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -27,9 +27,9 @@ export default function About() {
             {site.keywords.map((row, i) => (
               <div key={i} style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
                 {row.map((k) => (
-                  <span key={k} className="pill">
+                  <a key={k} className="pill" href={keywordLinks[k]} target="_blank" rel="noopener noreferrer" title={`${k} — Wikipedia`}>
                     {k}
-                  </span>
+                  </a>
                 ))}
               </div>
             ))}
@@ -41,13 +41,18 @@ export default function About() {
               </svg>
               Download CV
             </a>
-            <Link href="/resume/" className="btn btn-plain">
+            <Link href="/resume/" className="btn btn-plain btn-beam">
               View resume
             </Link>
           </div>
         </div>
-        <div className="panel headshot-card">
-          <Image src="/headshot.jpg" alt={site.name} fill style={{ objectFit: 'cover' }} priority />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flexShrink: 0 }}>
+          <div className="panel headshot-card">
+            <Image src="/headshot.jpg" alt={site.name} fill style={{ objectFit: 'cover' }} priority />
+          </div>
+          <div className="status-line">
+            Status: <span className="val">Building</span> <span className="spin-line" aria-hidden="true"></span>
+          </div>
         </div>
       </div>
 
@@ -56,8 +61,7 @@ export default function About() {
         <div style={{ whiteSpace: 'pre' }}>
           {'Current:   Platform Engineer / SRE @ House of Doge  (Dogecoin payment infrastructure)\n'}
           {'Founder:   Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale\n'}
-          {'History:   20y telecom-grade backend @ One New Zealand    Status: '}
-          <span style={{ color: 'var(--accent)' }}>Running</span>
+          {'History:   20y telecom-grade backend @ One New Zealand '}
           <span className="cursor" />
         </div>
       </div>

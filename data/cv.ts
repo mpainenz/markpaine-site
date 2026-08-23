@@ -15,6 +15,17 @@ export const site = {
   ],
 };
 
+export const keywordLinks: Record<string, string> = {
+  'Multi-Cloud': 'https://en.wikipedia.org/wiki/Multicloud',
+  'DevOps / SRE': 'https://en.wikipedia.org/wiki/Site_reliability_engineering',
+  Kubernetes: 'https://en.wikipedia.org/wiki/Kubernetes',
+  IaC: 'https://en.wikipedia.org/wiki/Infrastructure_as_code',
+  'CI/CD': 'https://en.wikipedia.org/wiki/CI/CD',
+  Linux: 'https://en.wikipedia.org/wiki/Linux',
+  'Full-Stack': 'https://en.wikipedia.org/wiki/Solution_stack',
+  'ML / AI Inference': 'https://en.wikipedia.org/wiki/Machine_learning',
+};
+
 export type Job = {
   company: string;
   role: string;
