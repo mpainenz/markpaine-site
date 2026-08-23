@@ -23,7 +23,7 @@ export default function About() {
         <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15 }}>
           <h1 className="hero-name">{site.name}</h1>
           <p style={{ fontSize: 15.5, color: 'var(--text-soft)', maxWidth: '40ch', margin: 0 }}>{site.byline}</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+          <div className="pill-rows" style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
             {site.keywords.map((row, i) => (
               <div key={i} style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
                 {row.map((k) => (
@@ -60,7 +60,7 @@ export default function About() {
         <div className="prompt-line">
           $ whoami --verbose<span className="cursor" style={{ marginLeft: 6 }} />
         </div>
-        <div style={{ whiteSpace: 'pre' }}>
+        <div className="whoami-body" style={{ whiteSpace: 'pre' }}>
           {'Current:   Platform Engineer / SRE @ House of Doge  (Dogecoin payment infrastructure)\n'}
           {'Founder:   Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale\n'}
           {'History:   20y telecom-grade backend @ One New Zealand'}
