@@ -46,7 +46,9 @@ export default function Resume() {
           <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
             <div className="job-head">
               <div className="job-title">
-                {job.company} <span className="job-role">· {job.role}</span>
+                {job.company}
+                <span className="job-sep"> · </span>
+                <span className="job-role">{job.role}</span>
               </div>
               {(job.meta || job.current) && (
                 <div className="job-meta">

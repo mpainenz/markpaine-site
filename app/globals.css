@@ -86,8 +86,8 @@ a:hover {
   .nav {
     padding: 18px 0 12px;
   }
-  .fill-main.centered {
-    padding-top: 12px;
+  .page .fill-main.centered {
+    padding-top: 0;
   }
   /* Pills: one flowing wrap group instead of two enforced rows
      (!important needed — the rows carry inline display:flex) */
@@ -102,14 +102,31 @@ a:hover {
   .whoami {
     overflow-x: visible;
   }
-  /* Portrait fills the screen width on mobile */
+  /* Portrait: smaller, centered card on mobile */
   .hero-media {
     width: 100%;
+    align-items: center;
+    padding: 8px 0 4px;
+  }
+  .hero-media .headshot-card,
+  .hero-media .status-line {
+    width: min(72%, 280px);
   }
   .hero-media .headshot-card {
-    width: 100%;
     height: auto;
     aspect-ratio: 235 / 287;
+  }
+  /* Skills: narrower label column so values get room (labels wrap to two lines) */
+  .page .skills-grid {
+    grid-template-columns: 96px 1fr !important;
+  }
+  /* Resume cards: role sits under the company name */
+  .job-sep {
+    display: none;
+  }
+  .job-title .job-role {
+    display: block;
+    margin-top: 2px;
   }
   .whoami .whoami-body {
     row-gap: 12px;
