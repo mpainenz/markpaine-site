@@ -30,6 +30,7 @@ export type Job = {
   company: string;
   role: string;
   meta: string;
+  current?: boolean;
   blurb?: string;
   intro?: string;
   bullets: string[];
@@ -40,6 +41,7 @@ export const experience: Job[] = [
     company: 'House of Doge',
     role: 'Platform Engineer / SRE',
     meta: 'Remote · 2025 —',
+    current: true,
     blurb:
       'House of Doge is a cryptocurrency startup building payment and tokenization infrastructure for Dogecoin — the services, rails, and blockchain plumbing connecting traditional finance with cryptocurrency ledgers.',
     intro: 'Platform, CI/CD, and SRE ownership across the engineering org:',

@@ -35,7 +35,7 @@ export default function About() {
             ))}
           </div>
           <div style={{ display: 'flex', gap: 12, marginTop: 6, flexWrap: 'wrap' }}>
-            <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent">
+            <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam">
               <svg className="btn-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
               </svg>

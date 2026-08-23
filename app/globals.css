@@ -290,7 +290,6 @@ a.pill:focus-visible {
     animation: none;
   }
   .btn-accent,
-  .btn-accent::after,
   .btn-accent .btn-icon {
     transition: none;
     transform: none;
@@ -318,16 +317,7 @@ a.pill:focus-visible {
   color: var(--accent);
   font-weight: 600;
   position: relative;
-  overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.25s ease;
-}
-.btn-accent::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(105deg, transparent 42%, color-mix(in oklab, var(--accent) 30%, transparent) 50%, transparent 58%);
-  transform: translateX(-130%);
 }
 .btn-accent:hover,
 .btn-accent:focus-visible {
@@ -335,11 +325,6 @@ a.pill:focus-visible {
   border-color: var(--accent-bright);
   transform: translateY(-1px);
   box-shadow: 0 0 20px -6px color-mix(in oklab, var(--accent) 55%, transparent);
-}
-.btn-accent:hover::after,
-.btn-accent:focus-visible::after {
-  transform: translateX(130%);
-  transition: transform 0.55s ease;
 }
 .btn-accent:active {
   transform: translateY(0) scale(0.98);
@@ -376,6 +361,28 @@ a.pill:focus-visible {
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor {
+    animation: none;
+  }
+}
+
+/* Current-role indicator: pulsing dot beside the timeline meta */
+.current-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 7px;
+  vertical-align: 1px;
+  animation: current-pulse 2s ease-out infinite;
+}
+@keyframes current-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent); }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .current-dot {
     animation: none;
   }
 }

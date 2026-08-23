@@ -11,16 +11,13 @@ export default function Resume() {
         <div className="name">{site.name}</div>
         <div className="byline">{site.byline}</div>
         <div className="contact">
-          {[site.email, site.location, site.github.replace('https://', ''), site.linkedin.replace('https://www.', '').replace(/\/$/, '')].map(
-            (item, i) => (
-              <span key={item}>
-                {i > 0 && <span> · </span>}
-                <span style={{ whiteSpace: 'nowrap' }}>{item}</span>
-              </span>
-            ),
-          )}
+          {[site.email, site.location].map((item, i) => (
+            <span key={item}>
+              {i > 0 && <span> · </span>}
+              <span style={{ whiteSpace: 'nowrap' }}>{item}</span>
+            </span>
+          ))}
         </div>
-        <div className="keywords">{site.keywords.flat().join(' · ')}</div>
       </div>
 
       <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -41,7 +38,16 @@ export default function Resume() {
               <div className="job-title">
                 {job.company} <span className="job-role">· {job.role}</span>
               </div>
-              <div className="job-meta">{job.meta}</div>
+              <div className="job-meta">
+                {job.current && (
+                  <>
+                    <span className="current-dot" aria-hidden="true"></span>
+                    <span style={{ color: 'var(--accent)' }}>current</span>
+                    {' · '}
+                  </>
+                )}
+                {job.meta}
+              </div>
             </div>
             {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
             {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}
