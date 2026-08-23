@@ -140,7 +140,7 @@ export default function Resume() {
           $ cat references.txt<span className="cursor" style={{ marginLeft: 6 }} />
         </div>
         <div className="panel no-print mono" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
-          <div style={{ color: '#E0806E' }}>cat: references.txt: Permission denied</div>
+          <div style={{ color: '#E5C07B' }}>cat: references.txt: elevated permissions required</div>
           <div style={{ color: 'var(--faint)' }}>
             # references are available on request — <Link href="/contact/">mark --contact</Link>
           </div>

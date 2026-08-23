@@ -70,12 +70,17 @@ a:hover {
 /* Grow on large screens */
 @media (min-width: 1440px) {
   .page {
-    max-width: 1040px;
+    max-width: 1140px;
   }
 }
 @media (min-width: 1920px) {
   .page {
-    max-width: 1200px;
+    max-width: 1380px;
+  }
+}
+@media (min-width: 2400px) {
+  .page {
+    max-width: 1560px;
   }
 }
 
@@ -181,14 +186,14 @@ a:hover {
 }
 @media (min-width: 1440px) {
   .headshot-card {
-    width: 265px;
-    height: 324px;
+    width: 295px;
+    height: 360px;
   }
 }
 @media (min-width: 1920px) {
   .headshot-card {
-    width: 290px;
-    height: 354px;
+    width: 330px;
+    height: 403px;
   }
 }
 
