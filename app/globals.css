@@ -530,9 +530,13 @@ a.pill:focus-visible {
 /* --- print: the CV PDF ------------------------------------------------- */
 @page {
   size: A4;
-  /* Zero page margins so the letterhead band can bleed to the paper edge (H2);
-     content spacing is handled by .page padding in the print block below. */
-  margin: 0;
+  /* Horizontal margins stay 0 so the letterhead band bleeds to the paper edge (H2);
+     top/bottom margins give every natural page break breathing room. */
+  margin: 40px 0 40px;
+}
+@page :first {
+  /* Page 1's letterhead band reaches the very top. */
+  margin-top: 0;
 }
 
 .print-only {
@@ -584,10 +588,13 @@ a.pill:focus-visible {
   }
   .print-break {
     break-before: page;
-    padding-top: 44px;
   }
   .tombstones > div {
-    flex: 1 1 100%;
+    flex: 1 1 100% !important;
+  }
+  /* Narrow label column so long group names wrap and skills get the width */
+  .page .skills-grid {
+    grid-template-columns: 112px 1fr !important;
   }
   .panel {
     border: none;

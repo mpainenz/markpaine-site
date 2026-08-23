@@ -87,15 +87,16 @@ export const earlierRoles = [
 ];
 
 export const skills: { group: string; items: string }[] = [
-  { group: 'Languages', items: 'Go · Rust · Python · C# · C++ · Kotlin · Delphi · PHP · TypeScript · JavaScript · React · HTML · CSS' },
   { group: 'Cloud', items: 'Multi-Cloud: AWS · GCP · Azure' },
   { group: 'Platform', items: 'Linux · Kubernetes · Linkerd · Tailscale · Docker' },
+  { group: 'Languages', items: 'Go · Rust · Python · C# · C++ · Java · Kotlin · Delphi · PHP · TypeScript · JavaScript' },
+  { group: 'Web', items: 'React · HTML · CSS' },
   { group: 'Infrastructure as Code', items: 'Terraform · Pulumi · CDK' },
   { group: 'CI/CD', items: 'GitHub Actions · GitLabs · ArgoCD' },
   { group: 'Observability', items: 'OpenTelemetry · Prometheus · Grafana · Loki · Sentry' },
   { group: 'Agentic AI', items: 'Cursor · Codex · Claude Code · LangGraph' },
   { group: 'Databases', items: 'ClickHouse · Postgres · MSSQL' },
-  { group: 'ML / Data Science', items: 'Linear Regression · scikit-learn · Pandas · NumPy · Jupyter' },
+  { group: 'ML / Data Science', items: 'Linear Regression · Scikit-learn · Pandas · NumPy · Jupyter' },
 ];
 
 export const education = [
