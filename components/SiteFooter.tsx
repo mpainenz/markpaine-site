@@ -23,7 +23,14 @@ export default function SiteFooter() {
         color: 'var(--faint)',
       }}
     >
-      <span>Mark Paine · Auckland, NZ</span>
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+        <svg width="20" height="26" viewBox="0 0 100 130" fill="none" stroke="var(--faint)" strokeWidth="4" strokeLinejoin="round" opacity="0.7" aria-hidden="true">
+          <path d="M38 3 L46 11 L45 19 L59 29 L67 26 L61 41 L50 53 L40 47 L43 34 L31 17 Z" />
+          <path d="M48 60 L38 76 L23 93 L11 108 L5 118 L15 116 L31 101 L45 85 L53 69 Z" />
+          <path d="M8 123 l7 2 -5 5 Z" />
+        </svg>
+        Mark Paine · Auckland, NZ
+      </span>
       <a href={site.repo} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer" style={{ padding: '8px 14px', fontSize: 13 }}>
         {iconGit} View Source
       </a>

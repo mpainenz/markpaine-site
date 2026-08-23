@@ -2,7 +2,7 @@ export const site = {
   name: 'Mark Paine',
   domain: 'markpaine.dev',
   byline:
-    'Multi-cloud platform engineering on Docker and Kubernetes, with a focus on carrier-grade reliability - currently building cryptocurrency payment and tokenization infrastructure.',
+    'Multi-cloud platform engineering, with a focus on carrier-grade reliability - currently building cryptocurrency payment and tokenization infrastructure.',
   location: 'Auckland, New Zealand',
   email: 'mpainenz@gmail.com',
   github: 'https://github.com/mpainenz',
@@ -89,7 +89,7 @@ export const skills: { group: string; items: string }[] = [
   { group: 'Cloud', items: 'Multi-cloud: AWS · GCP · Azure' },
   { group: 'Platform', items: 'Linux · Kubernetes · Linkerd · Tailscale · Docker' },
   { group: 'Infrastructure as Code', items: 'Terraform · Pulumi · CDK' },
-  { group: 'CI/CD', items: 'GitHub Actions · GitLab CI · ArgoCD GitOps' },
+  { group: 'CI/CD', items: 'GitHub Actions · GitLabs · ArgoCD GitOps' },
   { group: 'Observability', items: 'Honeycomb · OpenTelemetry · Prometheus · Grafana · Loki · Sentry' },
   { group: 'AI / ML', items: 'Cursor · Claude · Codex · LangGraph · Linear Regression' },
   { group: 'Databases', items: 'ClickHouseDB · Postgres · MSSQL' },

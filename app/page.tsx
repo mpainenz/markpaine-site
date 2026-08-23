@@ -19,8 +19,8 @@ export default function About() {
     <main className="fill-main centered" style={{ gap: 20 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
 
-      <div style={{ display: 'flex', gap: 36, alignItems: 'stretch', flexWrap: 'wrap' }}>
-        <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15, justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', gap: 36, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+        <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15 }}>
           <h1 className="hero-name">{site.name}</h1>
           <p style={{ fontSize: 15.5, color: 'var(--text-soft)', maxWidth: '40ch', margin: 0 }}>{site.byline}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>

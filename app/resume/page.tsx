@@ -83,7 +83,7 @@ export default function Resume() {
               <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--text-soft)' }}>
                 {r.company} <span style={{ color: 'var(--faint)', fontWeight: 400 }}>· {r.role}</span>
               </div>
-              <div className="mono" style={{ fontSize: 11.5, color: 'var(--faint)' }}>{r.meta}</div>
+              <div className="mono" style={{ fontSize: 11.5, color: 'var(--faint)', whiteSpace: 'nowrap' }}>{r.meta}</div>
             </div>
           ))}
         </div>
@@ -96,17 +96,18 @@ export default function Resume() {
           <div
             className="panel skills-grid"
             style={{
-              padding: '18px 22px',
+              padding: '16px 22px',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '14px 26px',
+              gridTemplateColumns: 'minmax(120px, max-content) 1fr',
+              gap: '7px 18px',
               fontSize: 12.5,
               flexGrow: 1,
+              alignContent: 'start',
             }}
           >
             {skills.map((s) => (
-              <div key={s.group}>
-                <div style={{ color: 'var(--faint)', fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4 }}>
+              <div key={s.group} style={{ display: 'contents' }}>
+                <div style={{ color: 'var(--faint)', fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', paddingTop: 2 }}>
                   {s.group}
                 </div>
                 <div style={{ color: 'var(--text-soft)' }}>{s.items}</div>

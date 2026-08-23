@@ -334,7 +334,7 @@ a.pill:focus-visible {
 }
 .btn-accent:hover .btn-icon,
 .btn-accent:focus-visible .btn-icon {
-  transform: translateY(2px);
+  transform: scale(1.25);
 }
 .btn-plain {
   border: 1px solid var(--border-strong);
