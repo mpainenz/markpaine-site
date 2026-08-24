@@ -5,6 +5,13 @@ import { site, experience, earlierRoles, skills, education } from '@/data/cv';
 export const metadata: Metadata = { title: 'Resume' };
 
 export default function Resume() {
+  const printContacts = [
+    { label: site.email, href: `mailto:${site.email}` },
+    { label: site.location },
+    { label: 'github.com/mpainenz', href: site.github },
+    { label: 'linkedin.com/in/mark-paine-663092a4', href: site.linkedin },
+  ];
+
   return (
     <main style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
       {/* Print-only letterhead: the on-screen identity lives in the nav/About, which print hides. */}
@@ -12,10 +19,16 @@ export default function Resume() {
         <div className="name">{site.name}</div>
         <div className="byline">{site.byline}</div>
         <div className="contact">
-          {[site.email, site.location].map((item, i) => (
-            <span key={item}>
+          {printContacts.map((item, i) => (
+            <span key={item.label}>
               {i > 0 && <span> · </span>}
-              <span style={{ whiteSpace: 'nowrap' }}>{item}</span>
+              {item.href ? (
+                <a href={item.href} style={{ whiteSpace: 'nowrap', color: 'inherit', textDecoration: 'none' }}>
+                  {item.label}
+                </a>
+              ) : (
+                <span style={{ whiteSpace: 'nowrap' }}>{item.label}</span>
+              )}
             </span>
           ))}
         </div>
@@ -46,10 +59,13 @@ export default function Resume() {
         {experience.map((job) => (
           <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
             <div className="job-head">
-              <div className="job-title">
-                {job.company}
-                <span className="job-sep"> · </span>
-                <span className="job-role">{job.role}</span>
+              <div>
+                <div className="job-title">
+                  {job.company}
+                  <span className="job-sep"> · </span>
+                  <span className="job-role">{job.role}</span>
+                </div>
+                {job.focus && <div className="job-focus">{job.focus}</div>}
               </div>
               {(job.meta || job.current) && (
                 <div className="job-meta">
@@ -92,7 +108,7 @@ export default function Resume() {
         </div>
       </section>
 
-      <section style={{ display: 'flex', gap: 24, alignItems: 'stretch', flexWrap: 'wrap' }}>
+      <section className="credentials-layout" style={{ display: 'flex', gap: 24, alignItems: 'stretch', flexWrap: 'wrap' }}>
         <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div className="prompt-line mono">$ cat skills.yaml</div>
           <div className="print-only print-section-heading">SKILLS</div>

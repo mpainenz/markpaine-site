@@ -2,7 +2,7 @@ export const site = {
   name: 'Mark Paine',
   domain: 'markpaine.dev',
   byline:
-    'Multi-cloud platform engineering, with a focus on carrier-grade reliability - currently building cryptocurrency payment and tokenization infrastructure.',
+    'Senior CI/CD and platform engineer with 20 years building and operating high-availability telecom, cloud, and payment systems across AWS, Azure, and GCP.',
   location: 'Auckland, New Zealand',
   email: 'mpainenz@gmail.com',
   github: 'https://github.com/mpainenz',
@@ -29,6 +29,7 @@ export const keywordLinks: Record<string, string> = {
 export type Job = {
   company: string;
   role: string;
+  focus?: string;
   meta: string;
   current?: boolean;
   printBreak?: boolean;
@@ -40,18 +41,21 @@ export type Job = {
 export const experience: Job[] = [
   {
     company: 'House of Doge',
-    role: 'Platform Engineer / SRE',
+    role: 'Senior Developer — CI/CD',
+    focus: 'Platform engineering and SRE focus',
     meta: 'Remote · 2025 —',
     current: true,
     blurb:
       'House of Doge is a cryptocurrency startup building payment and tokenization infrastructure for Dogecoin — the services, rails, and blockchain plumbing connecting traditional finance with cryptocurrency ledgers.',
-    intro: 'Platform, CI/CD, and SRE ownership across the engineering org:',
     bullets: [
-      "AWS EKS platform — greenfields build of highly available, multi-environment, multi-region EKS clusters, provisioned entirely through IaC, secured with an mTLS service mesh (Linkerd), and hosting the organisation's full microservice fleet",
-      'CI/CD — responsible for the configuration and deployment of ArgoCD, delivering a GitOps and GitHub Actions based approach to container builds and deployment',
-      "DBMS — responsible for deploying and managing the organisation's databases as highly available clustered instances: ClickHouse, TigerBeetle, and Aurora DB",
-      'Observability — distributed tracing via OpenTelemetry and Honeycomb, metrics and dashboards via Prometheus and Grafana, and error tracking with Sentry',
-      'Agentic AI — delivering secured custom MCP services for developers, and building guardrails that give internally deployed agents controlled access into company systems',
+      'Built highly available, multi-environment and multi-region AWS EKS platforms, including VPCs, subnetting, private endpoints, load balancing, DNS, and Linkerd mTLS',
+      'Authored Helm charts and Kustomize overlays and troubleshot production workloads with kubectl',
+      'Built self-service delivery through standardised pipelines and a custom Argo CD-integrated deployment interface',
+      'Implemented review-gated AWS CDK workflows that generated infrastructure diffs before deployment',
+      'Provisioned and maintained production PostgreSQL databases and highly available Aurora, ClickHouse, and TigerBeetle infrastructure',
+      'Operated observability with OpenTelemetry, Honeycomb, Prometheus, Alertmanager, Grafana, and Sentry',
+      'Implemented least-privilege IAM and secrets management with External Secrets Operator, supporting SOC 2 readiness',
+      'Built secured MCP services and least-privilege guardrails for internal developer agents',
     ],
   },
   {
@@ -59,18 +63,24 @@ export const experience: Job[] = [
     role: 'Principal Developer',
     meta: 'Auckland · 2005 — 2025',
     blurb:
-      "One New Zealand is the country's incumbent mobile telco — 99.5% population coverage, the world's first nationwide Starlink satellite-TXT service, and deep enterprise IoT and VoIP portfolios.",
+      'Major New Zealand telecommunications provider operating nationwide mobile, broadband, IoT, and enterprise voice services.',
+    intro:
+      'Progressed from Junior Developer to Principal Developer over 20 years, mentoring engineers and setting quality standards through architecture guidance and code review.',
     bullets: [
-      'Cloud migration — moved core business systems from on-premise data centers to AWS',
-      'IoT device management platform spanning Azure and AWS',
-      'Routing, provisioning, and monitoring engine for the Ribbon core voice network',
-      'CRM financial module — general ledger and PCI-DSS compliant payment handling',
+      'Operated business-critical telecom platforms under contractual availability and service-quality commitments, covering on-call, incident leadership, root-cause analysis, and reliability improvements',
+      'Designed cloud networking across VPCs, subnetting, routing, VPN connectivity, and private endpoints, alongside routing and provisioning for the Ribbon core voice network',
+      'Migrated core systems from on-premises infrastructure to AWS and contributed to a GCP/Azure IoT platform using Cloud SQL, Cloud Functions, Pub/Sub, Event Hubs, and Service Bus',
+      'Built developer self-service delivery through GitLab pipelines, combining automated push/merge deployments with approval-gated releases',
+      'Operated monitoring and alerting using Prometheus, Alertmanager, Grafana, and Loki',
+      'Owned national telephone-number administration and portability workflows, integrating with the Industry Portability Management System (IPMS) and TNAS toll-free portability system',
+      'Built and operated queue-based routing automation for the Ribbon voice platform, processing high-volume number-portability and network-routing updates',
+      'Delivered general-ledger and PCI-DSS-compliant payment capabilities',
     ],
   },
   {
     company: 'Solus Designs Limited',
     role: 'Founder',
-    meta: '',
+    meta: '2011 —',
     printBreak: true,
     blurb:
       'Solus Designs is my independent product company — software products designed, built, and shipped end to end.',
@@ -87,20 +97,19 @@ export const earlierRoles = [
 ];
 
 export const skills: { group: string; items: string }[] = [
-  { group: 'Cloud', items: 'Multi-Cloud: AWS · GCP · Azure' },
-  { group: 'Platform', items: 'Linux · Kubernetes · Linkerd · Tailscale · Docker' },
-  { group: 'Languages', items: 'Go · Rust · Python · C# · C++ · Java · Kotlin · Delphi' },
+  { group: 'Cloud', items: 'AWS · GCP · Azure' },
+  { group: 'Kubernetes', items: 'EKS · Helm · Kustomize · kubectl · Linkerd · Docker' },
+  { group: 'Infrastructure as Code', items: 'AWS CDK · Terraform · Pulumi' },
+  { group: 'CI/CD & GitOps', items: 'GitHub Actions · GitLab CI/CD · Argo CD' },
+  { group: 'Observability', items: 'OpenTelemetry · Prometheus · Alertmanager · Grafana · Loki · Honeycomb · Sentry' },
+  { group: 'Messaging', items: 'Kafka · AWS SNS/SQS · Google Cloud Pub/Sub · Azure Event Hubs · Service Bus' },
+  { group: 'Databases', items: 'PostgreSQL · MySQL · Aurora · ClickHouse · TigerBeetle · Microsoft SQL Server' },
+  { group: 'Languages', items: 'Go · C# · TypeScript · Python · Rust · C++ · Java · Kotlin · Delphi' },
   { group: 'Web', items: 'React · HTML · CSS · JavaScript · TypeScript · PHP' },
-  { group: 'Infrastructure as Code', items: 'Terraform · Pulumi · CDK' },
-  { group: 'CI/CD', items: 'GitHub Actions · GitLabs · ArgoCD' },
-  { group: 'Observability', items: 'OpenTelemetry · Prometheus · Grafana · Loki · Sentry' },
-  { group: 'Agentic AI', items: 'Cursor · Codex · Claude Code · LangGraph' },
-  { group: 'Databases', items: 'ClickHouse · Postgres · MSSQL' },
-  { group: 'ML / Data Science', items: 'Linear Regression · Scikit-learn · Pandas · NumPy · Jupyter' },
+  { group: 'AI / Data', items: 'MCP · LangGraph · Scikit-learn · Pandas · NumPy · Jupyter' },
 ];
 
 export const education = [
-  { title: 'AWS Certified Developer — Associate', detail: '' },
+  { title: 'AWS Certified Developer — Associate', detail: 'Active' },
   { title: 'B. Computing Systems', detail: 'Unitec · 2003 — 2005' },
-  { title: 'Extramural: Virology I', detail: 'Columbia University · 2013' },
 ];

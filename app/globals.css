@@ -496,6 +496,12 @@ a.pill:focus-visible {
   color: var(--accent);
   font-weight: 500;
 }
+.job-focus {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--faint);
+  font-style: italic;
+}
 .job-meta {
   font-family: ui-monospace, Menlo, Consolas, monospace;
   font-size: 12px;
@@ -592,6 +598,14 @@ a.pill:focus-visible {
   .tombstones > div {
     flex: 1 1 100% !important;
   }
+  /* Keep the PDF text order sequential for ATS extraction. */
+  .credentials-layout,
+  .credentials-layout > div {
+    display: block !important;
+  }
+  .credentials-layout > div + div {
+    margin-top: 10pt;
+  }
   /* Narrow label column so long group names wrap and skills get the width */
   .page .skills-grid {
     grid-template-columns: 112px 1fr !important;
@@ -606,6 +620,9 @@ a.pill:focus-visible {
   }
   .job-blurb {
     font-size: 9.5pt;
+  }
+  .job-focus {
+    font-size: 9pt;
   }
   .bullets,
   .job-intro {

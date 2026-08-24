@@ -9,7 +9,7 @@ const personJsonLd = {
   email: `mailto:${site.email}`,
   url: `https://${site.domain}`,
   image: `https://${site.domain}/headshot.jpg`,
-  jobTitle: 'Platform Engineer / SRE',
+  jobTitle: 'Senior Developer — CI/CD',
   worksFor: { '@type': 'Organization', name: 'House of Doge' },
   sameAs: [site.github, site.linkedin, site.instagram],
 };
@@ -62,7 +62,7 @@ export default function About() {
         </div>
         <div className="whoami-body">
           <span className="k">Current:</span>
-          <span className="v">Platform Engineer / SRE @ House of Doge&nbsp;&nbsp;(Dogecoin payment infrastructure)</span>
+          <span className="v">Senior Developer — CI/CD @ House of Doge&nbsp;&nbsp;(Platform engineering / SRE)</span>
           <span className="k">Founder:</span>
           <span className="v">Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale</span>
           <span className="k">History:</span>

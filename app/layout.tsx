@@ -6,7 +6,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — Platform Engineering`,
+    default: `${site.name} — CI/CD & Platform Engineering`,
     template: `%s — ${site.name}`,
   },
   description: site.byline,
