@@ -19,7 +19,7 @@ export default function Resume() {
     { label: site.email, href: `mailto:${site.email}` },
     { label: site.location },
     { label: 'github.com/mpainenz', href: site.social.github },
-    { label: 'linkedin.com/in/mark-paine-663092a4', href: site.social.linkedin },
+    { label: 'linkedin.com/in/markpainenz', href: site.social.linkedin },
   ];
 
   return (

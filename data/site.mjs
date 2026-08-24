@@ -16,7 +16,7 @@ export const site = {
   historySummary: '20y telecom-grade backend @ One New Zealand',
   social: {
     github: 'https://github.com/mpainenz',
-    linkedin: 'https://www.linkedin.com/in/mark-paine-663092a4/',
+    linkedin: 'https://www.linkedin.com/in/markpainenz/',
     instagram: 'https://www.instagram.com/mpainenz',
   },
   repositoryUrl: 'https://github.com/mpainenz/markpaine-site',
