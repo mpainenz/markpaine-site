@@ -166,9 +166,7 @@ export default function Resume() {
 
       <section aria-labelledby="references-heading" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <h2 id="references-heading" className="sr-only">References</h2>
-        <div className="prompt-line mono">
-          $ cat references.txt<span className="cursor" style={{ marginLeft: 6 }} />
-        </div>
+        <div className="prompt-line mono">$ cat references.txt</div>
         <div className="panel no-print mono references-copy" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
           <div style={{ color: '#E5C07B' }}>cat: references.txt: elevated permissions required</div>
           <div style={{ color: 'var(--faint)' }}>
