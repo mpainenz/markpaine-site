@@ -7,7 +7,7 @@
   --text: #e7ecf5;
   --text-soft: #b9c6da;
   --muted: #8fa0b8;
-  --faint: #61708c;
+  --faint: #8190a8;
   --accent: #7ee0a3;
   --accent-bright: #a5efc1;
   --pill-border: #24344e;
@@ -22,7 +22,7 @@
   --text: #16202e;
   --text-soft: #33415c;
   --muted: #5a6b84;
-  --faint: #8593a8;
+  --faint: #59677c;
   --accent: #177a4c;
   --accent-bright: #0f5e39;
   --pill-border: #c9d2df;
@@ -52,6 +52,38 @@ a {
 }
 a:hover {
   color: var(--accent-bright);
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  transform: translateY(-150%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .mono {
@@ -135,6 +167,15 @@ a:hover {
   }
   .whoami .whoami-body {
     row-gap: 12px;
+  }
+  .footer-location-full {
+    display: none;
+  }
+}
+
+@media (min-width: 721px) {
+  .footer-location-short {
+    display: none;
   }
 }
 
@@ -287,6 +328,10 @@ a:hover {
   font-family: ui-monospace, Menlo, Consolas, monospace;
   font-size: 12.5px;
   color: var(--accent);
+}
+.references-copy a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
 }
 .pill {
   border: 1px solid var(--pill-border);
@@ -491,6 +536,7 @@ a.pill:focus-visible {
 .job-title {
   font-size: 16.5px;
   font-weight: 700;
+  margin: 0;
 }
 .job-role {
   color: var(--accent);
@@ -524,6 +570,9 @@ a.pill:focus-visible {
   font-size: 13px;
   color: var(--muted);
   line-height: 1.55;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .bullet {
   display: flex;
@@ -577,6 +626,7 @@ a.pill:focus-visible {
   }
 
   .no-print,
+  .skip-link,
   .nav,
   .site-footer,
   .current-dot {
@@ -600,10 +650,10 @@ a.pill:focus-visible {
   }
   /* Keep the PDF text order sequential for ATS extraction. */
   .credentials-layout,
-  .credentials-layout > div {
+  .credentials-layout > section {
     display: block !important;
   }
-  .credentials-layout > div + div {
+  .credentials-layout > section + section {
     margin-top: 10pt;
   }
   /* Narrow label column so long group names wrap and skills get the width */
@@ -671,7 +721,7 @@ a.pill:focus-visible {
   }
 
   .skills-grid > div,
-  .education-list > div {
+  .education-list > li {
     break-inside: avoid;
   }
 }

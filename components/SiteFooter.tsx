@@ -1,4 +1,4 @@
-import { site } from '@/data/cv';
+import { site } from '@/data/site.mjs';
 import { NZ_H, NZ_D } from '@/data/nzpath';
 
 const iconGit = (
@@ -25,18 +25,23 @@ export default function SiteFooter() {
       }}
     >
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-        <svg width={(26 * 100) / NZ_H} height={26} viewBox={`0 0 100 ${NZ_H}`} aria-hidden="true" style={{ flexShrink: 0 }}>
-          <defs>
-            <linearGradient id="nzfoot" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.15" />
-            </linearGradient>
-          </defs>
-          <path d={NZ_D} fill="url(#nzfoot)" />
-        </svg>
-        Mark Paine · Auckland, NZ
+        {site.footerDecoration === 'new-zealand' && (
+          <svg width={(26 * 100) / NZ_H} height={26} viewBox={`0 0 100 ${NZ_H}`} aria-hidden="true" style={{ flexShrink: 0 }}>
+            <defs>
+              <linearGradient id="nzfoot" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.15" />
+              </linearGradient>
+            </defs>
+            <path d={NZ_D} fill="url(#nzfoot)" />
+          </svg>
+        )}
+        <span>
+          {site.name} · <span className="footer-location-full">{site.location}</span>
+          <span className="footer-location-short">{site.mobileLocation}</span>
+        </span>
       </span>
-      <a href={site.repo} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer" style={{ padding: '8px 14px', fontSize: 13 }}>
+      <a href={site.repositoryUrl} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer" style={{ padding: '8px 14px', fontSize: 13 }}>
         {iconGit} View Source
       </a>
     </footer>

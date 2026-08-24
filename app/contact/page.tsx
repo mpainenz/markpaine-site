@@ -1,8 +1,17 @@
 import type { Metadata } from 'next';
-import { site } from '@/data/cv';
+import { site } from '@/data/site.mjs';
 import CopyEmail from '@/components/CopyEmail';
 
-export const metadata: Metadata = { title: 'Contact' };
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: `Contact ${site.name}.`,
+  alternates: { canonical: '/contact/' },
+  openGraph: {
+    title: `Contact — ${site.name}`,
+    description: `Contact ${site.name}.`,
+    url: '/contact/',
+  },
+};
 
 const iconGitHub = (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -24,7 +33,7 @@ const iconInstagram = (
 
 export default function Contact() {
   return (
-    <main className="fill-main centered" style={{ gap: 0 }}>
+    <main id="main-content" className="fill-main centered" style={{ gap: 0 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 18, flexGrow: 1 }}>
         <div className="prompt-line mono" style={{ fontSize: 13.5 }}>
           $ mark --contact
@@ -40,13 +49,13 @@ export default function Contact() {
         </p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 4 }}>
           <CopyEmail email={site.email} />
-          <a href={site.github} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a href={site.social.github} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
             {iconGitHub} GitHub
           </a>
-          <a href={site.linkedin} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a href={site.social.linkedin} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
             {iconLinkedIn} LinkedIn
           </a>
-          <a href={site.instagram} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a href={site.social.instagram} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
             {iconInstagram} Instagram
           </a>
         </div>

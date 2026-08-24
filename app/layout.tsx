@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { site } from '@/data/cv';
+import { site } from '@/data/site.mjs';
 import SiteNav from '@/components/SiteNav';
 import SiteFooter from '@/components/SiteFooter';
 import './globals.css';
@@ -9,15 +9,24 @@ export const metadata: Metadata = {
     default: `${site.name} — CI/CD & Platform Engineering`,
     template: `%s — ${site.name}`,
   },
-  description: site.byline,
-  metadataBase: new URL(`https://${site.domain}`),
+  description: site.description,
+  metadataBase: new URL(site.baseUrl),
+  alternates: { canonical: '/' },
+  authors: [{ name: site.name, url: site.baseUrl }],
+  creator: site.name,
   openGraph: {
     title: site.name,
-    description: site.byline,
-    url: `https://${site.domain}`,
+    description: site.description,
+    url: site.baseUrl,
     siteName: site.name,
-    images: ['/headshot.jpg'],
+    images: [{ url: site.portraitPath, alt: site.name }],
     type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: site.name,
+    description: site.description,
+    images: [site.portraitPath],
   },
 };
 
@@ -30,6 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <div className="page">
           <SiteNav />
           {children}

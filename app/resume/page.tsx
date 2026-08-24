@@ -1,23 +1,33 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { site, experience, earlierRoles, skills, education } from '@/data/cv';
+import { site } from '@/data/site.mjs';
+import { experience, earlierRoles, skills, education } from '@/data/cv';
 
-export const metadata: Metadata = { title: 'Resume' };
+export const metadata: Metadata = {
+  title: 'Resume',
+  description: `${site.name}'s experience, skills, and education.`,
+  alternates: { canonical: '/resume/' },
+  openGraph: {
+    title: `Resume — ${site.name}`,
+    description: `${site.name}'s experience, skills, and education.`,
+    url: '/resume/',
+  },
+};
 
 export default function Resume() {
   const printContacts = [
     { label: site.email, href: `mailto:${site.email}` },
     { label: site.location },
-    { label: 'github.com/mpainenz', href: site.github },
-    { label: 'linkedin.com/in/mark-paine-663092a4', href: site.linkedin },
+    { label: 'github.com/mpainenz', href: site.social.github },
+    { label: 'linkedin.com/in/mark-paine-663092a4', href: site.social.linkedin },
   ];
 
   return (
-    <main style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
+    <main id="main-content" style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
       {/* Print-only letterhead: the on-screen identity lives in the nav/About, which print hides. */}
       <div className="print-only print-letterhead">
         <div className="name">{site.name}</div>
-        <div className="byline">{site.byline}</div>
+        <div className="byline">{site.description}</div>
         <div className="contact">
           {printContacts.map((item, i) => (
             <span key={item.label}>
@@ -37,7 +47,7 @@ export default function Resume() {
       <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
           <h1 className="page-title">Resume</h1>
-          <a href="/Mark-Paine-CV.pdf" download className="btn btn-accent btn-beam" style={{ padding: '8px 14px', fontSize: 13 }}>
+          <a href={site.pdfPath} download className="btn btn-accent btn-beam" style={{ padding: '8px 14px', fontSize: 13 }}>
             <svg className="btn-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
             </svg>
@@ -51,7 +61,8 @@ export default function Resume() {
         </div>
       </header>
 
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <section aria-labelledby="experience-heading" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <h2 id="experience-heading" className="sr-only">Experience</h2>
         <div className="prompt-line mono">
           $ cat experience.log<span className="cursor" style={{ marginLeft: 6 }} />
         </div>
@@ -60,11 +71,11 @@ export default function Resume() {
           <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
             <div className="job-head">
               <div>
-                <div className="job-title">
+                <h3 className="job-title">
                   {job.company}
                   <span className="job-sep"> · </span>
                   <span className="job-role">{job.role}</span>
-                </div>
+                </h3>
                 {job.focus && <div className="job-focus">{job.focus}</div>}
               </div>
               {(job.meta || job.current) && (
@@ -82,14 +93,14 @@ export default function Resume() {
             </div>
             {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
             {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}
-            <div className="bullets">
+            <ul className="bullets">
               {job.bullets.map((b) => (
-                <div key={b} className="bullet">
-                  <span className="bullet-marker">▸</span>
+                <li key={b} className="bullet">
+                  <span className="bullet-marker" aria-hidden="true">▸</span>
                   <span>{b}</span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </article>
         ))}
         <div className="tombstones" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
@@ -109,10 +120,11 @@ export default function Resume() {
       </section>
 
       <section className="credentials-layout" style={{ display: 'flex', gap: 24, alignItems: 'stretch', flexWrap: 'wrap' }}>
-        <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <section aria-labelledby="skills-heading" style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <h2 id="skills-heading" className="sr-only">Skills</h2>
           <div className="prompt-line mono">$ cat skills.yaml</div>
           <div className="print-only print-section-heading">SKILLS</div>
-          <div
+          <dl
             className="panel skills-grid"
             style={{
               padding: '16px 22px',
@@ -126,36 +138,38 @@ export default function Resume() {
           >
             {skills.map((s) => (
               <div key={s.group} style={{ display: 'contents' }}>
-                <div style={{ color: 'var(--faint)', fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', paddingTop: 2 }}>
+                <dt style={{ color: 'var(--faint)', fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', paddingTop: 2 }}>
                   {s.group}
-                </div>
-                <div style={{ color: 'var(--text-soft)' }}>{s.items}</div>
+                </dt>
+                <dd style={{ color: 'var(--text-soft)', margin: 0 }}>{s.items}</dd>
               </div>
             ))}
-          </div>
-        </div>
-        <div style={{ flex: '1 1 240px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          </dl>
+        </section>
+        <section aria-labelledby="education-heading" style={{ flex: '1 1 240px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <h2 id="education-heading" className="sr-only">Education</h2>
           <div className="prompt-line mono">$ cat education</div>
           <div className="print-only print-section-heading">EDUCATION</div>
-          <div
+          <ul
             className="panel education-list"
-            style={{ padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12.5, lineHeight: 1.55, flexGrow: 1 }}
+            style={{ margin: 0, padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12.5, lineHeight: 1.55, flexGrow: 1, listStyle: 'none' }}
           >
             {education.map((e) => (
-              <div key={e.title}>
+              <li key={e.title}>
                 <div style={{ color: 'var(--text)', fontWeight: 600 }}>{e.title}</div>
                 {e.detail && <div style={{ color: 'var(--faint)' }}>{e.detail}</div>}
-              </div>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </section>
       </section>
 
-      <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <section aria-labelledby="references-heading" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <h2 id="references-heading" className="sr-only">References</h2>
         <div className="prompt-line mono">
           $ cat references.txt<span className="cursor" style={{ marginLeft: 6 }} />
         </div>
-        <div className="panel no-print mono" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
+        <div className="panel no-print mono references-copy" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
           <div style={{ color: '#E5C07B' }}>cat: references.txt: elevated permissions required</div>
           <div style={{ color: 'var(--faint)' }}>
             # references are available on request — <Link href="/contact/">mark --contact</Link>

@@ -1,31 +1,3 @@
-export const site = {
-  name: 'Mark Paine',
-  domain: 'markpaine.dev',
-  byline:
-    'Senior CI/CD and platform engineer with 20 years building and operating high-availability telecom, cloud, and payment systems across AWS, Azure, and GCP.',
-  location: 'Auckland, New Zealand',
-  email: 'mpainenz@gmail.com',
-  github: 'https://github.com/mpainenz',
-  linkedin: 'https://www.linkedin.com/in/mark-paine-663092a4/',
-  instagram: 'https://www.instagram.com/mpainenz',
-  repo: 'https://github.com/mpainenz/markpaine-site',
-  keywords: [
-    ['Multi-Cloud', 'DevOps / SRE', 'Kubernetes', 'IaC'],
-    ['CI/CD', 'Linux', 'Full-Stack', 'ML / AI Inference'],
-  ],
-};
-
-export const keywordLinks: Record<string, string> = {
-  'Multi-Cloud': 'https://en.wikipedia.org/wiki/Multicloud',
-  'DevOps / SRE': 'https://en.wikipedia.org/wiki/Site_reliability_engineering',
-  Kubernetes: 'https://en.wikipedia.org/wiki/Kubernetes',
-  IaC: 'https://en.wikipedia.org/wiki/Infrastructure_as_code',
-  'CI/CD': 'https://en.wikipedia.org/wiki/CI/CD',
-  Linux: 'https://en.wikipedia.org/wiki/Linux',
-  'Full-Stack': 'https://en.wikipedia.org/wiki/Solution_stack',
-  'ML / AI Inference': 'https://en.wikipedia.org/wiki/Machine_learning',
-};
-
 export type Job = {
   company: string;
   role: string;

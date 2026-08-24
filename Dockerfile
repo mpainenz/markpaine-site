@@ -1,5 +1,14 @@
-# The site is built (and the CV PDF rendered) in CI before this image builds;
-# the image is just nginx serving the static export.
-FROM nginx:1.27-alpine
+FROM node:22-bookworm-slim AS build
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build \
+    && npx playwright install --with-deps chromium \
+    && npm run pdf \
+    && npm run pdf:check
+
+FROM nginxinc/nginx-unprivileged:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY out/ /usr/share/nginx/html/
+COPY --from=build /app/out/ /usr/share/nginx/html/

@@ -1,57 +1,50 @@
-// Renders out/Mark-Paine-CV.pdf from the built static site's /resume page,
-// using the @media print stylesheet. Run after `next build`.
-import http from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { startStaticServer } from './static-server.mjs';
 
 const OUT = path.resolve('out');
-const PDF = path.join(OUT, 'Mark-Paine-CV.pdf');
+const pdfFilename = process.env.CV_PDF_FILENAME ?? 'Mark-Paine-CV.pdf';
+const PDF = path.resolve(OUT, pdfFilename);
 
 if (!existsSync(OUT)) {
-  console.error('out/ not found — run `next build` first.');
-  process.exit(1);
+  throw new Error('out/ not found — run `npm run build` first.');
 }
 
-const types = {
-  '.html': 'text/html',
-  '.css': 'text/css',
-  '.js': 'text/javascript',
-  '.jpg': 'image/jpeg',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
-  '.woff2': 'font/woff2',
-  '.json': 'application/json',
-};
+if (PDF !== OUT && !PDF.startsWith(`${OUT}${path.sep}`)) {
+  throw new Error('CV_PDF_FILENAME must resolve inside out/.');
+}
 
-const server = http.createServer(async (req, res) => {
-  let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-  if (p.endsWith('/')) p += 'index.html';
-  const file = path.join(OUT, p);
-  try {
-    const body = await readFile(file);
-    res.writeHead(200, { 'content-type': types[path.extname(file)] ?? 'application/octet-stream' });
-    res.end(body);
-  } catch {
-    res.writeHead(404);
-    res.end('not found');
+const staticServer = await startStaticServer(OUT);
+let browser;
+
+try {
+  browser = await chromium.launch();
+  const page = await browser.newPage();
+  const response = await page.goto(`${staticServer.baseUrl}/resume/`, { waitUntil: 'networkidle' });
+
+  if (!response?.ok()) {
+    throw new Error(`Resume page failed to load (${response?.status() ?? 'no response'}).`);
   }
-});
 
-await new Promise((r) => server.listen(0, '127.0.0.1', r));
-const { port } = server.address();
+  await page.getByRole('heading', { name: 'Resume' }).waitFor();
+  await page.getByText('House of Doge', { exact: false }).first().waitFor();
+  await page.pdf({
+    path: PDF,
+    format: 'A4',
+    printBackground: true,
+    preferCSSPageSize: true,
+  });
 
-const browser = await chromium.launch();
-const page = await browser.newPage();
-await page.goto(`http://127.0.0.1:${port}/resume/`, { waitUntil: 'networkidle' });
-await page.pdf({
-  path: PDF,
-  format: 'A4',
-  printBackground: true,
-  preferCSSPageSize: true,
-});
-await browser.close();
-server.close();
+  const pdf = await readFile(PDF);
+  const pdfStat = await stat(PDF);
+  if (!pdf.subarray(0, 5).equals(Buffer.from('%PDF-')) || pdfStat.size < 5_000) {
+    throw new Error(`Rendered PDF is invalid or unexpectedly small (${pdfStat.size} bytes).`);
+  }
 
-console.log(`wrote ${PDF}`);
+  console.log(`wrote ${PDF} (${pdfStat.size} bytes)`);
+} finally {
+  await browser?.close();
+  await staticServer.close();
+}

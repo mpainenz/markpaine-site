@@ -4,16 +4,17 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
-env:
-  IMAGE: ghcr.io/mpainenz/markpaine-site
+concurrency:
+  group: markpaine-site-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +26,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit and configuration tests
+        run: npm test
+
       - name: Build static site
         run: npm run build
 
@@ -34,14 +44,34 @@ jobs:
       - name: Render CV PDF from print stylesheet
         run: npm run pdf
 
+      - name: Validate CV PDF
+        run: npm run pdf:check
+
+      - name: Route, responsive, link, and accessibility tests
+        run: npm run test:site
+
       - name: Upload CV artifact
         uses: actions/upload-artifact@v4
         with:
           name: Mark-Paine-CV
           path: out/Mark-Paine-CV.pdf
 
+  publish:
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.ENABLE_IMAGE_PUBLISH == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set image coordinates
+        id: image
+        shell: bash
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
       - name: Log in to GHCR
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -49,28 +79,34 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push image
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ${{ env.IMAGE }}:${{ github.sha }}
-            ${{ env.IMAGE }}:latest
+            ${{ steps.image.outputs.name }}:${{ github.sha }}
+            ${{ steps.image.outputs.name }}:latest
+
+      - name: Check out GitOps repo
+        if: vars.ENABLE_GITOPS_DEPLOY == 'true' && vars.GITOPS_REPOSITORY != '' && vars.GITOPS_PATH != ''
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.GITOPS_REPOSITORY }}
+          token: ${{ secrets.GITOPS_TOKEN || secrets.SOLUS_GITOPS_TOKEN }}
+          path: gitops
 
       - name: Bump image tag in GitOps repo
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: vars.ENABLE_GITOPS_DEPLOY == 'true' && vars.GITOPS_REPOSITORY != '' && vars.GITOPS_PATH != ''
         env:
-          GITOPS_TOKEN: ${{ secrets.SOLUS_GITOPS_TOKEN }}
+          GITOPS_PATH: ${{ vars.GITOPS_PATH }}
         run: |
-          if [ -z "$GITOPS_TOKEN" ]; then
-            echo "::warning::SOLUS_GITOPS_TOKEN not set — skipping GitOps bump. Image pushed as ${IMAGE}:${GITHUB_SHA}."
+          cd "gitops/${GITOPS_PATH}"
+          sed -i "s|newTag: .*|newTag: ${GITHUB_SHA}|" kustomization.yaml
+          if git diff --quiet; then
+            echo "GitOps manifest already references ${GITHUB_SHA}."
             exit 0
           fi
-          git clone --depth 1 "https://x-access-token:${GITOPS_TOKEN}@github.com/mpainenz/solus.git" gitops
-          cd gitops/argocd/tortoise/apps/markpaine-site/deployment
-          sed -i "s|newTag: .*|newTag: ${GITHUB_SHA}|" kustomization.yaml
-          git config user.name "markpaine-site-ci"
-          git config user.email "ci@markpaine-site"
-          git commit -am "markpaine-site: deploy ${GITHUB_SHA}"
+          git config user.name "cv-site-ci"
+          git config user.email "ci@users.noreply.github.com"
+          git commit -am "deploy: update CV site to ${GITHUB_SHA}"
           git push
