@@ -646,7 +646,8 @@ a.pill:focus-visible {
     break-before: page;
   }
   .tombstones > div {
-    flex: 1 1 100% !important;
+    flex: 1 1 0 !important;
+    min-width: 0;
   }
   /* Keep the PDF text order sequential for ATS extraction. */
   .credentials-layout,
@@ -659,6 +660,12 @@ a.pill:focus-visible {
   /* Narrow label column so long group names wrap and skills get the width */
   .page .skills-grid {
     grid-template-columns: 112px 1fr !important;
+  }
+  .page .education-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8pt 20pt !important;
+    padding: 6pt 16pt 0 !important;
   }
   .panel {
     border: none;

@@ -55,10 +55,12 @@ export const experience: Job[] = [
     meta: '2011 —',
     printBreak: true,
     blurb:
-      'Solus Designs is my independent product company — software products designed, built, and shipped end to end.',
+      'Solus Designs is my independent AI systems company, building production machine-learning software and distributed LLM inference infrastructure.',
     bullets: [
-      'Tensor Relay — distributed AI inference at scale: model catalog and publishing, cluster formation and scheduling, backend services, and a Steam-distributed client',
-      'Algorithmic trading — automated trading engine: broker integration, market screeners, machine-learning signal models, options strategy execution, and risk management',
+      'Designed and built TensorRelay, a Steam-distributed LLM inference platform using pipeline parallelism across heterogeneous consumer GPUs, with a Go control plane, custom Rust runtime, C++/llama.cpp stage execution, and Steam P2P transport',
+      'Implemented dynamic model-layer sharding, cluster scheduling and admission control, model artifact distribution, and an OpenAI-compatible API; deployed the private-beta backend to Kubernetes through GitHub Actions and Argo CD',
+      'Built and operated Octopus Trader, a live Python and Interactive Brokers trading system with a custom backtesting engine, production risk controls, and feature engineering across 12,000+ historical trades spanning 2005–2023',
+      'Built and operated a repeatable MLOps workflow covering feature engineering across multi-year market datasets, construction of training, validation and forward-test sets, linear-regression experimentation, ensemble model training and cross-validation, inference serving, periodic retraining, and controlled promotion into live trading',
     ],
   },
 ];
@@ -78,7 +80,10 @@ export const skills: { group: string; items: string }[] = [
   { group: 'Databases', items: 'PostgreSQL · MySQL · Aurora · ClickHouse · TigerBeetle · Microsoft SQL Server' },
   { group: 'Languages', items: 'Go · C# · TypeScript · Python · Rust · C++ · Java · Kotlin · Delphi' },
   { group: 'Web', items: 'React · HTML · CSS · JavaScript · TypeScript · PHP' },
-  { group: 'AI / Data', items: 'MCP · LangGraph · Scikit-learn · Pandas · NumPy · Jupyter' },
+  {
+    group: 'AI / ML',
+    items: 'Linear regression · MLOps · Model serving · LangGraph · MCP · Distributed LLM inference',
+  },
 ];
 
 export const education = [
