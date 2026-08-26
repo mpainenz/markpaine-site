@@ -40,8 +40,9 @@ export const experience: Job[] = [
       'Progressed from Junior Developer to Principal Developer over 20 years, mentoring engineers and setting quality standards through architecture guidance and code review.',
     bullets: [
       'Operated business-critical telecom platforms under contractual availability and service-quality commitments, covering on-call, incident leadership, root-cause analysis, and reliability improvements',
-      'Designed cloud networking across VPCs, subnetting, routing, VPN connectivity, and private endpoints; built Cisco Meraki API integrations and configuration automation supporting device procurement and automated SD-WAN provisioning for One NZ’s Connected Business service',
-      'Migrated core systems from on-premises infrastructure to AWS and contributed to a GCP/Azure IoT platform using Cloud SQL, Cloud Functions, Pub/Sub, Event Hubs, and Service Bus',
+      'Designed cloud networking across VPCs, subnetting, routing, VPN connectivity and private endpoints; built GCP-hosted Cisco Meraki integrations and configuration automation supporting device procurement and automated SD-WAN provisioning for One NZ’s Connected Business service',
+      'Modernised and containerised core systems for AWS, decomposing selected workloads into microservices and migrating several large production databases from on-premises infrastructure',
+      'Built and maintained device-provisioning services on AWS ECS for enterprise telematics integrations with Solution Dynamics and Telematics Guru; contributed separately to Azure IoT workflows using Event Hubs and Service Bus',
       'Built developer self-service delivery through GitLab pipelines, combining automated push/merge deployments with approval-gated releases',
       'Operated monitoring and alerting using Prometheus, Alertmanager, Grafana, and Loki',
       'Owned national telephone-number administration and portability workflows, integrating with the Industry Portability Management System (IPMS) and TNAS toll-free portability system',
