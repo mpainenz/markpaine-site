@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict';
 import AxeBuilder from '@axe-core/playwright';
 import { chromium } from 'playwright';
+import { analyticsHosts } from '../data/analytics.mjs';
 import { startStaticServer } from './static-server.mjs';
 
-const routes = ['/', '/resume/', '/contact/'];
+const routes = ['/', '/resume/', '/contact/', '/privacy/'];
+const expectedWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+const expectAnalytics = process.env.ANALYTICS_EXPECTED === 'true';
 const viewports = [
   { name: 'desktop', width: 1440, height: 1000 },
   { name: 'mobile', width: 390, height: 844 },
@@ -51,6 +54,16 @@ try {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(staticServer.baseUrl, { waitUntil: 'networkidle' });
+  const tracker = page.locator('script[src="/analytics/script.js"]');
+  if (expectAnalytics) {
+    assert.ok(expectedWebsiteId, 'NEXT_PUBLIC_UMAMI_WEBSITE_ID is required when ANALYTICS_EXPECTED=true');
+    assert.equal(await tracker.getAttribute('data-website-id'), expectedWebsiteId);
+    assert.equal(await tracker.getAttribute('data-domains'), analyticsHosts.join(','));
+    assert.equal(await tracker.getAttribute('data-do-not-track'), 'true');
+  } else {
+    assert.equal(await tracker.count(), 0, 'Unconfigured builds must not load analytics');
+  }
+  await page.locator('[data-umami-event="cv-download"]').first().waitFor();
 
   const internalPaths = await page.locator('a[href]').evaluateAll((anchors) =>
     anchors
@@ -62,6 +75,20 @@ try {
     const response = await page.request.get(`${staticServer.baseUrl}${pathname}`);
     assert.equal(response.status(), 200, `Internal link is broken: ${pathname}`);
   }
+  const sitemap = await (await page.request.get(`${staticServer.baseUrl}/sitemap.xml`)).text();
+  assert.match(sitemap, /<loc>https:\/\/markpaine\.dev\/privacy\/<\/loc>/);
+
+  await page.goto(`${staticServer.baseUrl}/privacy/`);
+  const privacyParagraphs = await page.locator('main article p').allTextContents();
+  assert.deepEqual(
+    privacyParagraphs.map((paragraph) => paragraph.replace(/\s+/g, ' ').trim()),
+    [
+      'This site uses self-hosted, cookieless analytics to understand how visitors use it. Analytics may include pages viewed, visit duration, referring site, approximate country or region, browser, operating system, device type, campaign parameters, and interactions such as CV downloads or contact-link clicks.',
+      'The analytics system does not retain raw IP addresses, use advertising identifiers, or sell information. Normal hosting and security infrastructure may process request metadata as part of operating the site.',
+      'Anonymous visit summaries may be processed by third-party service providers for private operational notifications. Detailed analytics are retained for up to 12 months. Browser Do Not Track preferences are respected.',
+      'Privacy questions can be sent through the contact details on this site.',
+    ],
+  );
 
   await page.getByRole('button', { name: 'Switch to light mode' }).click();
   const lightAccessibility = await new AxeBuilder({ page }).analyze();
@@ -76,6 +103,44 @@ try {
   await page.getByRole('heading', { name: 'This page does not exist.' }).waitFor();
 
   await context.close();
+
+  const analyticsContext = await browser.newContext();
+  await analyticsContext.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async () => {} },
+    });
+    globalThis.__trackedEvents = [];
+    globalThis.umami = {
+      track: (eventName) => {
+        globalThis.__trackedEvents.push(eventName);
+      },
+    };
+  });
+  const analyticsPage = await analyticsContext.newPage();
+
+  await analyticsPage.goto(`${staticServer.baseUrl}/contact/`);
+  for (const eventName of ['github-click', 'linkedin-click', 'instagram-click']) {
+    assert.ok((await analyticsPage.locator(`[data-umami-event="${eventName}"]`).count()) >= 1, `Missing ${eventName} event`);
+  }
+  const emailButton = analyticsPage.locator('button.btn-accent');
+  await emailButton.click();
+  assert.deepEqual(await analyticsPage.evaluate(() => globalThis.__trackedEvents), ['email-copy']);
+  await analyticsPage.getByRole('status').getByText('Email address copied to clipboard.').waitFor();
+
+  await analyticsPage.evaluate(() => {
+    globalThis.umami.track = () => {
+      throw new Error('collector unavailable');
+    };
+  });
+  await emailButton.click();
+  await analyticsPage.getByRole('status').getByText('Email address copied to clipboard.').waitFor();
+
+  await analyticsPage.goto(`${staticServer.baseUrl}/resume/`);
+  await analyticsPage.locator('[data-umami-event="cv-download"]').waitFor();
+  await analyticsPage.locator('[data-umami-event="contact-click"]').first().waitFor();
+
+  await analyticsContext.close();
   console.log('route, responsive layout, link, and accessibility checks passed');
 } finally {
   await browser?.close();

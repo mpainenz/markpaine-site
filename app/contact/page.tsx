@@ -49,13 +49,31 @@ export default function Contact() {
         </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 4 }}>
           <CopyEmail email={site.email} />
-          <a href={site.social.github} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a
+            href={site.social.github}
+            className="btn btn-plain btn-beam"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="github-click"
+          >
             {iconGitHub} GitHub
           </a>
-          <a href={site.social.linkedin} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a
+            href={site.social.linkedin}
+            className="btn btn-plain btn-beam"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="linkedin-click"
+          >
             {iconLinkedIn} LinkedIn
           </a>
-          <a href={site.social.instagram} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a
+            href={site.social.instagram}
+            className="btn btn-plain btn-beam"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="instagram-click"
+          >
             {iconInstagram} Instagram
           </a>
         </div>

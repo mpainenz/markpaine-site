@@ -33,7 +33,17 @@ export default function Resume() {
             <span key={item.label}>
               {i > 0 && <span> · </span>}
               {item.href ? (
-                <a href={item.href} style={{ whiteSpace: 'nowrap', color: 'inherit', textDecoration: 'none' }}>
+                <a
+                  href={item.href}
+                  style={{ whiteSpace: 'nowrap', color: 'inherit', textDecoration: 'none' }}
+                  data-umami-event={
+                    item.href === site.social.github
+                      ? 'github-click'
+                      : item.href === site.social.linkedin
+                        ? 'linkedin-click'
+                        : undefined
+                  }
+                >
                   {item.label}
                 </a>
               ) : (
@@ -47,7 +57,13 @@ export default function Resume() {
       <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
           <h1 className="page-title">Resume</h1>
-          <a href={site.pdfPath} download className="btn btn-accent btn-beam" style={{ padding: '8px 14px', fontSize: 13 }}>
+          <a
+            href={site.pdfPath}
+            download
+            className="btn btn-accent btn-beam"
+            style={{ padding: '8px 14px', fontSize: 13 }}
+            data-umami-event="cv-download"
+          >
             <svg className="btn-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
             </svg>
@@ -170,7 +186,10 @@ export default function Resume() {
         <div className="panel no-print mono references-copy" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
           <div style={{ color: '#E5C07B' }}>cat: references.txt: elevated permissions required</div>
           <div style={{ color: 'var(--faint)' }}>
-            # references are available on request — <Link href="/contact/">mark --contact</Link>
+            # references are available on request —{' '}
+            <Link href="/contact/" data-umami-event="contact-click">
+              mark --contact
+            </Link>
           </div>
         </div>
         <div className="print-only" style={{ fontSize: '10pt', color: '#444b55' }}>References available on request.</div>

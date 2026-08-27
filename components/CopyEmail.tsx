@@ -2,12 +2,29 @@
 
 import { useState } from 'react';
 
+declare global {
+  interface Window {
+    umami?: {
+      track: (eventName: string) => unknown;
+    };
+  }
+}
+
+function trackEmailCopy() {
+  try {
+    void Promise.resolve(window.umami?.track('email-copy')).catch(() => {});
+  } catch {
+    // Analytics must never affect the contact action.
+  }
+}
+
 export default function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(email);
+      trackEmailCopy();
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {

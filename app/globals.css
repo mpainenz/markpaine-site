@@ -660,6 +660,8 @@ a.pill:focus-visible {
   /* Narrow label column so long group names wrap and skills get the width */
   .page .skills-grid {
     grid-template-columns: 112px 1fr !important;
+    gap: 5px 18px !important;
+    padding: 10px 16px !important;
   }
   .page .education-list {
     display: grid !important;

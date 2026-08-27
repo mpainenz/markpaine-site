@@ -26,6 +26,7 @@ in sync.
 - A4 PDF generation with content and reading-order validation.
 - Automated lint, type, configuration, responsive, link, and accessibility checks.
 - Clean-checkout, unprivileged nginx container build with security headers.
+- Optional production-only, cookieless Umami analytics through a same-origin collector.
 - Optional GHCR publishing and GitOps deployment for repository owners who enable it.
 
 ## Make it yours in five minutes
@@ -79,6 +80,29 @@ npm run verify     # run the full local/CI quality gate
 `npm run pdf` and `npm run test:site` require the Chromium browser installed by
 Playwright and a completed production build.
 
+### Analytics
+
+Analytics is disabled for local development, tests, preview hosts, and builds
+without a website ID. To include the tracker in a production static export, set
+the public build-time value:
+
+```bash
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=your-umami-website-id npm run build
+```
+
+The generated site loads `/analytics/script.js`, which sends events to the
+same-origin `/analytics/api/send` endpoint. Umami derives that endpoint from
+the script path, so no `data-host-url` override is needed. The tracker is
+restricted to the apex and `www` hosts configured in `data/analytics.mjs` and
+honours browser Do Not Track settings.
+The website ID is public configuration, not a secret. The hosting layer must
+route only those collector paths to Umami; local and CI builds work without
+either the ID or collector.
+
+For the included image-publishing workflow, configure
+`NEXT_PUBLIC_UMAMI_WEBSITE_ID` as a GitHub repository variable. It is passed as
+a Docker build argument only for the publish build.
+
 ## How it works
 
 ```text
@@ -86,7 +110,7 @@ data/site.mjs + data/cv.ts
              |
              v
        Next.js pages
-          /  /resume/  /contact/
+     /  /resume/  /contact/  /privacy/
              |
              +--> static export in out/
              |
