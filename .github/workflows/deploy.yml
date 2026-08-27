@@ -16,7 +16,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:
@@ -64,7 +64,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set image coordinates
         id: image
@@ -91,7 +91,7 @@ jobs:
 
       - name: Check out GitOps repo
         if: vars.ENABLE_GITOPS_DEPLOY == 'true' && vars.GITOPS_REPOSITORY != '' && vars.GITOPS_PATH != ''
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ vars.GITOPS_REPOSITORY }}
           token: ${{ secrets.GITOPS_TOKEN || secrets.SOLUS_GITOPS_TOKEN }}
