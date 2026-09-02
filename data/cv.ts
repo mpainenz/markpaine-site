@@ -15,8 +15,7 @@ export const experience: Job[] = [
     company: 'House of Doge',
     role: 'Senior Developer — CI/CD',
     focus: 'Platform engineering and SRE focus',
-    meta: 'Remote contractor from Auckland · 2025 —',
-    current: true,
+    meta: 'Remote contractor from Auckland · 2025 — Aug 2026',
     blurb:
       'House of Doge is a Texas-headquartered cryptocurrency startup building payment and tokenization infrastructure for Dogecoin — the services, rails, and blockchain plumbing connecting traditional finance with cryptocurrency ledgers.',
     bullets: [

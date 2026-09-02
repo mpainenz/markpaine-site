@@ -59,6 +59,12 @@ test('canonical domain is a production hostname', () => {
   assert.equal(new URL(site.baseUrl).protocol, 'https:');
 });
 
+test('current positioning does not claim a former employer', () => {
+  assert.equal(site.currentRole, 'Senior Platform Engineer');
+  assert.equal(site.currentEmployer, null);
+  assert.equal(site.status, 'Available');
+});
+
 test('content security policy permits only same-origin analytics delivery', async () => {
   const nginxConfig = await readFile('nginx.conf', 'utf8');
   const csp = nginxConfig.match(/add_header Content-Security-Policy "([^"]+)"/)?.[1];

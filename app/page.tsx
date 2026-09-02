@@ -10,7 +10,7 @@ const personJsonLd = {
   url: site.baseUrl,
   image: `${site.baseUrl}${site.portraitPath}`,
   jobTitle: site.currentRole,
-  worksFor: { '@type': 'Organization', name: site.currentEmployer },
+  ...(site.currentEmployer ? { worksFor: { '@type': 'Organization', name: site.currentEmployer } } : {}),
   sameAs: Object.values(site.social),
 };
 
@@ -66,7 +66,8 @@ export default function About() {
         <div className="whoami-body">
           <span className="k">Current:</span>
           <span className="v">
-            {site.currentRole} @ {site.currentEmployer}&nbsp;&nbsp;({site.currentFocus})
+            {site.currentRole}
+            {site.currentEmployer ? ` @ ${site.currentEmployer}` : ''}&nbsp;&nbsp;({site.currentFocus})
           </span>
           <span className="k">Founder:</span>
           <span className="v">{site.founderSummary}</span>
