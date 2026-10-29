@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Fragment } from 'react';
 import { site } from '@/data/site.mjs';
-import { experience, earlierRoles, skills, education } from '@/data/cv';
+import { experience, earlierRoles, openSource, skills, education } from '@/data/cv';
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -84,40 +85,59 @@ export default function Resume() {
         </div>
         <div className="print-only print-section-heading">EXPERIENCE</div>
         {experience.map((job) => (
-          <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
-            <div className="job-head">
-              <div>
-                <h3 className="job-title">
-                  {job.company}
-                  <span className="job-sep"> · </span>
-                  <span className="job-role">{job.role}</span>
-                </h3>
-                {job.focus && <div className="job-focus">{job.focus}</div>}
-              </div>
-              {(job.meta || job.current) && (
-                <div className="job-meta">
-                  {job.meta}
-                  {job.current && (
-                    <>
-                      {' '}
-                      <span className="current-dot" aria-hidden="true"></span>
-                      <span style={{ color: 'var(--accent)' }}>Current</span>
-                    </>
-                  )}
+          <Fragment key={job.company}>
+            <article className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
+              <div className="job-head">
+                <div>
+                  <h3 className="job-title">
+                    {job.company}
+                    <span className="job-sep"> · </span>
+                    <span className="job-role">{job.role}</span>
+                  </h3>
+                  {job.focus && <div className="job-focus">{job.focus}</div>}
                 </div>
-              )}
-            </div>
-            {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
-            {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}
-            <ul className="bullets">
-              {job.bullets.map((b) => (
-                <li key={b} className="bullet">
-                  <span className="bullet-marker" aria-hidden="true">▸</span>
-                  <span>{b}</span>
-                </li>
+                {(job.meta || job.current) && (
+                  <div className="job-meta">
+                    {job.meta}
+                    {job.current && (
+                      <>
+                        {' '}
+                        <span className="current-dot" aria-hidden="true"></span>
+                        <span style={{ color: 'var(--accent)' }}>Current</span>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
+              {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}
+              <ul className="bullets">
+                {job.bullets.map((b) => (
+                  <li key={b} className="bullet">
+                    <span className="bullet-marker" aria-hidden="true">▸</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          {job.company === 'One New Zealand' && (
+            <section aria-labelledby="open-source-heading" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <h2 id="open-source-heading" className="sr-only">Open source</h2>
+              <div className="prompt-line mono">$ cat open-source.log</div>
+              <div className="print-only print-section-heading">OPEN SOURCE</div>
+              {openSource.map((contribution) => (
+                <article key={contribution.project} className="panel" style={{ padding: '16px 20px' }}>
+                  <h3 className="job-title" style={{ margin: 0 }}>
+                    <a href={contribution.url} style={{ textDecoration: 'underline' }}>{contribution.project}</a>
+                    <span className="job-sep"> · </span>
+                    <span className="job-role">{contribution.meta}</span>
+                  </h3>
+                  <p className="job-blurb" style={{ margin: '8px 0 0' }}>{contribution.detail}</p>
+                </article>
               ))}
-            </ul>
-          </article>
+            </section>
+          )}
+          </Fragment>
         ))}
         <div className="tombstones" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           {earlierRoles.map((r) => (

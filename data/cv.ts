@@ -70,6 +70,16 @@ export const earlierRoles = [
   { company: 'iHug', role: 'Customer Services', meta: '2003 — 04' },
 ];
 
+export const openSource = [
+  {
+    project: 'PyangBind',
+    meta: 'Open-source contributor · 2016',
+    url: 'https://github.com/robshakir/pyangbind/commits?author=mpainenz',
+    detail:
+      'Contributed fixes to Python bindings for YANG network models, correcting signed-integer ranges and keyed-list creation. PyangBind is used with OpenConfig models.',
+  },
+];
+
 export const skills: { group: string; items: string }[] = [
   { group: 'Cloud', items: 'AWS · GCP · Azure' },
   { group: 'Kubernetes', items: 'EKS · Helm · Kustomize · kubectl · Linkerd · Docker' },
