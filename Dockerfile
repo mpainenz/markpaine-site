@@ -1,6 +1,9 @@
 FROM node:22-bookworm-slim AS build
 WORKDIR /app
 
+ARG NEXT_PUBLIC_UMAMI_WEBSITE_ID
+ENV NEXT_PUBLIC_UMAMI_WEBSITE_ID=$NEXT_PUBLIC_UMAMI_WEBSITE_ID
+
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
