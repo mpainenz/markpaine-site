@@ -15,8 +15,7 @@ export const experience: Job[] = [
     company: 'House of Doge',
     role: 'Senior Developer — CI/CD',
     focus: 'Platform engineering and SRE focus',
-    meta: 'Remote contractor from Auckland · 2025 —',
-    current: true,
+    meta: 'Remote contractor from Auckland · 2025 — Aug 2026',
     blurb:
       'House of Doge is a Texas-headquartered cryptocurrency startup building payment and tokenization infrastructure for Dogecoin — the services, rails, and blockchain plumbing connecting traditional finance with cryptocurrency ledgers.',
     bullets: [
@@ -69,6 +68,16 @@ export const experience: Job[] = [
 export const earlierRoles = [
   { company: 'WXC Communications', role: 'Technical Support', meta: '2004 — 05' },
   { company: 'iHug', role: 'Customer Services', meta: '2003 — 04' },
+];
+
+export const openSource = [
+  {
+    project: 'PyangBind',
+    meta: 'Open-source contributor · 2016',
+    url: 'https://github.com/robshakir/pyangbind/commits?author=mpainenz',
+    detail:
+      'Contributed fixes to Python bindings for YANG network models, correcting signed-integer ranges and keyed-list creation. PyangBind is used with OpenConfig models.',
+  },
 ];
 
 export const skills: { group: string; items: string }[] = [
