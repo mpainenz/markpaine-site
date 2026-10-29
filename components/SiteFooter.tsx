@@ -1,5 +1,6 @@
 import { site } from '@/data/site.mjs';
 import { NZ_H, NZ_D } from '@/data/nzpath';
+import Link from 'next/link';
 
 const iconGit = (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -41,9 +42,19 @@ export default function SiteFooter() {
           <span className="footer-location-short">{site.mobileLocation}</span>
         </span>
       </span>
-      <a href={site.repositoryUrl} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer" style={{ padding: '8px 14px', fontSize: 13 }}>
-        {iconGit} View Source
-      </a>
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
+        <Link href="/privacy/">Privacy</Link>
+        <a
+          href={site.repositoryUrl}
+          className="btn btn-plain btn-beam"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ padding: '8px 14px', fontSize: 13 }}
+          data-umami-event="github-click"
+        >
+          {iconGit} View Source
+        </a>
+      </span>
     </footer>
   );
 }

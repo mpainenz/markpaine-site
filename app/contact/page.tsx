@@ -35,10 +35,6 @@ export default function Contact() {
   return (
     <main id="main-content" className="fill-main centered" style={{ gap: 0 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 18, flexGrow: 1 }}>
-        <div className="prompt-line mono" style={{ fontSize: 13.5 }}>
-          $ mark --contact
-          <span className="cursor" />
-        </div>
         <h1 style={{ fontSize: 'clamp(28px, 7vw, 36px)', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.15, margin: 0 }}>
           Interesting problem?
           <br />
@@ -47,15 +43,37 @@ export default function Contact() {
         <p style={{ fontSize: 15, color: 'var(--muted)', margin: 0, maxWidth: '56ch' }}>
           Based in Auckland, New Zealand — comfortable remote across timezones.
         </p>
+        <div className="prompt-line mono" style={{ fontSize: 13.5 }}>
+          $ mark --contact
+          <span className="cursor" />
+        </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 4 }}>
           <CopyEmail email={site.email} />
-          <a href={site.social.github} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a
+            href={site.social.github}
+            className="btn btn-plain btn-beam"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="github-click"
+          >
             {iconGitHub} GitHub
           </a>
-          <a href={site.social.linkedin} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a
+            href={site.social.linkedin}
+            className="btn btn-plain btn-beam"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="linkedin-click"
+          >
             {iconLinkedIn} LinkedIn
           </a>
-          <a href={site.social.instagram} className="btn btn-plain btn-beam" target="_blank" rel="noopener noreferrer">
+          <a
+            href={site.social.instagram}
+            className="btn btn-plain btn-beam"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-umami-event="instagram-click"
+          >
             {iconInstagram} Instagram
           </a>
         </div>
