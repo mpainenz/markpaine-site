@@ -23,6 +23,7 @@ export default function SiteNav() {
             href={l.href}
             className={pathname === l.href ? 'active' : ''}
             aria-current={pathname === l.href ? 'page' : undefined}
+            data-umami-event={l.href === '/contact/' ? 'contact-click' : undefined}
           >
             {l.label}
           </Link>

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Fragment } from 'react';
 import { site } from '@/data/site.mjs';
-import { experience, earlierRoles, skills, education } from '@/data/cv';
+import { experience, earlierRoles, openSource, skills, education } from '@/data/cv';
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -19,7 +20,7 @@ export default function Resume() {
     { label: site.email, href: `mailto:${site.email}` },
     { label: site.location },
     { label: 'github.com/mpainenz', href: site.social.github },
-    { label: 'linkedin.com/in/mark-paine-663092a4', href: site.social.linkedin },
+    { label: 'linkedin.com/in/markpainenz', href: site.social.linkedin },
   ];
 
   return (
@@ -33,7 +34,17 @@ export default function Resume() {
             <span key={item.label}>
               {i > 0 && <span> · </span>}
               {item.href ? (
-                <a href={item.href} style={{ whiteSpace: 'nowrap', color: 'inherit', textDecoration: 'none' }}>
+                <a
+                  href={item.href}
+                  style={{ whiteSpace: 'nowrap', color: 'inherit', textDecoration: 'none' }}
+                  data-umami-event={
+                    item.href === site.social.github
+                      ? 'github-click'
+                      : item.href === site.social.linkedin
+                        ? 'linkedin-click'
+                        : undefined
+                  }
+                >
                   {item.label}
                 </a>
               ) : (
@@ -47,7 +58,13 @@ export default function Resume() {
       <header className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
           <h1 className="page-title">Resume</h1>
-          <a href={site.pdfPath} download className="btn btn-accent btn-beam" style={{ padding: '8px 14px', fontSize: 13 }}>
+          <a
+            href={site.pdfPath}
+            download
+            className="btn btn-accent btn-beam"
+            style={{ padding: '8px 14px', fontSize: 13 }}
+            data-umami-event="cv-download"
+          >
             <svg className="btn-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
               <path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" />
             </svg>
@@ -68,40 +85,59 @@ export default function Resume() {
         </div>
         <div className="print-only print-section-heading">EXPERIENCE</div>
         {experience.map((job) => (
-          <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
-            <div className="job-head">
-              <div>
-                <h3 className="job-title">
-                  {job.company}
-                  <span className="job-sep"> · </span>
-                  <span className="job-role">{job.role}</span>
-                </h3>
-                {job.focus && <div className="job-focus">{job.focus}</div>}
-              </div>
-              {(job.meta || job.current) && (
-                <div className="job-meta">
-                  {job.meta}
-                  {job.current && (
-                    <>
-                      {' '}
-                      <span className="current-dot" aria-hidden="true"></span>
-                      <span style={{ color: 'var(--accent)' }}>Current</span>
-                    </>
-                  )}
+          <Fragment key={job.company}>
+            <article className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
+              <div className="job-head">
+                <div>
+                  <h3 className="job-title">
+                    {job.company}
+                    <span className="job-sep"> · </span>
+                    <span className="job-role">{job.role}</span>
+                  </h3>
+                  {job.focus && <div className="job-focus">{job.focus}</div>}
                 </div>
-              )}
-            </div>
-            {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
-            {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}
-            <ul className="bullets">
-              {job.bullets.map((b) => (
-                <li key={b} className="bullet">
-                  <span className="bullet-marker" aria-hidden="true">▸</span>
-                  <span>{b}</span>
-                </li>
+                {(job.meta || job.current) && (
+                  <div className="job-meta">
+                    {job.meta}
+                    {job.current && (
+                      <>
+                        {' '}
+                        <span className="current-dot" aria-hidden="true"></span>
+                        <span style={{ color: 'var(--accent)' }}>Current</span>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+              {job.blurb && <p className="job-blurb" style={{ margin: 0 }}>{job.blurb}</p>}
+              {job.intro && <p className="job-intro" style={{ margin: 0 }}>{job.intro}</p>}
+              <ul className="bullets">
+                {job.bullets.map((b) => (
+                  <li key={b} className="bullet">
+                    <span className="bullet-marker" aria-hidden="true">▸</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          {job.company === 'One New Zealand' && (
+            <section aria-labelledby="open-source-heading" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <h2 id="open-source-heading" className="sr-only">Open source</h2>
+              <div className="prompt-line mono">$ cat open-source.log</div>
+              <div className="print-only print-section-heading">OPEN SOURCE</div>
+              {openSource.map((contribution) => (
+                <article key={contribution.project} className="panel" style={{ padding: '16px 20px' }}>
+                  <h3 className="job-title" style={{ margin: 0 }}>
+                    <a href={contribution.url} style={{ textDecoration: 'underline' }}>{contribution.project}</a>
+                    <span className="job-sep"> · </span>
+                    <span className="job-role">{contribution.meta}</span>
+                  </h3>
+                  <p className="job-blurb" style={{ margin: '8px 0 0' }}>{contribution.detail}</p>
+                </article>
               ))}
-            </ul>
-          </article>
+            </section>
+          )}
+          </Fragment>
         ))}
         <div className="tombstones" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           {earlierRoles.map((r) => (
@@ -166,13 +202,14 @@ export default function Resume() {
 
       <section aria-labelledby="references-heading" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <h2 id="references-heading" className="sr-only">References</h2>
-        <div className="prompt-line mono">
-          $ cat references.txt<span className="cursor" style={{ marginLeft: 6 }} />
-        </div>
+        <div className="prompt-line mono">$ cat references.txt</div>
         <div className="panel no-print mono references-copy" style={{ padding: '14px 20px', fontSize: 12.5, lineHeight: 1.7 }}>
           <div style={{ color: '#E5C07B' }}>cat: references.txt: elevated permissions required</div>
           <div style={{ color: 'var(--faint)' }}>
-            # references are available on request — <Link href="/contact/">mark --contact</Link>
+            # references are available on request —{' '}
+            <Link href="/contact/" data-umami-event="contact-click">
+              mark --contact
+            </Link>
           </div>
         </div>
         <div className="print-only" style={{ fontSize: '10pt', color: '#444b55' }}>References available on request.</div>
