@@ -56,7 +56,7 @@ The default New Zealand footer outline is optional. Set `footerDecoration` to
 
 ## Local development
 
-Requires Node.js 22.13 or newer.
+Requires Node.js 24 or newer.
 
 ```bash
 npm install
