@@ -8,6 +8,30 @@ updates:
       javascript:
         patterns:
           - '*'
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Deferred 2026-10-30. typescript-eslint (bundled by eslint-config-next)
+      # rejects TypeScript 7 (peer typescript >=4.8.4 <6.1.0).
+      # Owner: Solus Engineering Lead. Review 2026-12-01, or sooner when
+      # typescript-eslint supports TypeScript 7.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
+      # Deferred 2026-10-30. eslint-plugin-react, eslint-plugin-import, and
+      # eslint-plugin-jsx-a11y (pulled in by eslint-config-next) do not declare
+      # ESLint 10. Owner: Solus Engineering Lead. Review 2026-12-01, or sooner
+      # when eslint-config-next supports ESLint 10.
+      - dependency-name: eslint
+        update-types:
+          - version-update:semver-major
+      # Do not take @types/node 26. The declared range stays on major 24,
+      # which already matches the Node 24 runtime in the separate LTS PR.
+      # Owner: Solus Engineering Lead. Review 2026-12-01.
+      - dependency-name: "@types/node"
+        update-types:
+          - version-update:semver-major
 
   - package-ecosystem: github-actions
     directory: /
