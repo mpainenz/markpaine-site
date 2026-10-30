@@ -42,3 +42,16 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      # Odd-numbered Node majors are Current releases and are never LTS.
+      # Docker ignore versions use Bundler syntax (Dependabot options reference):
+      # ~> 25.0 means >= 25.0 and < 26.0. Even LTS majors, including 24 and 26, stay allowed.
+      # There is no odd/even pattern, so a later odd major needs another entry.
+      # Owner: Solus Engineering Lead. Review 2026-12-01, or when moving to Node 26 LTS.
+      - dependency-name: node
+        versions:
+          - "~> 23.0"
+          - "~> 25.0"
+          - "~> 27.0"
+          - "~> 29.0"
+          - "~> 31.0"
