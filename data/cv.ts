@@ -19,6 +19,8 @@ export const experience: Job[] = [
     blurb:
       'House of Doge is a Texas-headquartered cryptocurrency startup building payment and tokenization infrastructure for Dogecoin — the services, rails, and blockchain plumbing connecting traditional finance with cryptocurrency ledgers.',
     bullets: [
+      'Applied autonomous agentic engineering to build SRE tooling supporting fault identification, investigation and resolution',
+      'Built MCP services providing secure access to internal systems, with auditing and least-privilege guardrails for developer agents',
       'Built highly available, multi-environment and multi-region AWS EKS platforms, including VPCs, subnetting, private endpoints, load balancing, DNS, and Linkerd mTLS',
       'Authored Helm charts and Kustomize overlays and troubleshot production workloads with kubectl',
       'Built self-service delivery through standardised pipelines and a custom Argo CD-integrated deployment interface',
@@ -26,8 +28,6 @@ export const experience: Job[] = [
       'Provisioned and maintained production PostgreSQL databases and highly available Aurora, ClickHouse, and TigerBeetle infrastructure',
       'Operated observability with OpenTelemetry, Honeycomb, Prometheus, Alertmanager, Grafana, and Sentry',
       'Implemented least-privilege IAM and secrets management with External Secrets Operator, supporting SOC 2 readiness',
-      'Built secured MCP services and least-privilege guardrails for internal developer agents',
-      'Applied agentic engineering to build SRE tooling supporting fault identification, investigation and resolution',
     ],
   },
   {
