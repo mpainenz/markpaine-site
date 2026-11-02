@@ -27,6 +27,7 @@ export const experience: Job[] = [
       'Operated observability with OpenTelemetry, Honeycomb, Prometheus, Alertmanager, Grafana, and Sentry',
       'Implemented least-privilege IAM and secrets management with External Secrets Operator, supporting SOC 2 readiness',
       'Built secured MCP services and least-privilege guardrails for internal developer agents',
+      'Applied agentic engineering to build SRE tooling supporting fault identification, investigation and resolution',
     ],
   },
   {
@@ -64,8 +65,6 @@ export const experience: Job[] = [
     bullets: [
       'Designed and built TensorRelay, a Steam-distributed LLM inference platform using pipeline parallelism across heterogeneous consumer GPUs, with a Go control plane, custom Rust runtime, C++/llama.cpp stage execution, and Steam P2P transport',
       'Implemented dynamic model-layer sharding, cluster scheduling and admission control, model artifact distribution, and an OpenAI-compatible API; deployed the private-beta backend to Kubernetes through GitHub Actions and Argo CD',
-      'Built and operated Octopus Trader, a live Python and Interactive Brokers trading system with a custom backtesting engine, production risk controls, and feature engineering across 12,000+ historical trades spanning 2005–2023',
-      'Built and operated a repeatable MLOps workflow covering feature engineering across multi-year market datasets, construction of training, validation and forward-test sets, linear-regression experimentation, ensemble model training and cross-validation, inference serving, periodic retraining, and controlled promotion into live trading',
     ],
   },
 ];
@@ -90,7 +89,7 @@ export const skills: { group: string; items: string }[] = [
   {
     group: 'AI / ML',
     items:
-      'Linear regression · MLOps · Model serving · RAG · Embeddings · Vector databases (Qdrant) · LangGraph · MCP · Distributed LLM inference',
+      'Linear regression · MLOps · Model serving · RAG · Embeddings · Vector databases (Qdrant) · LangChain · LangGraph · Amazon Bedrock · MCP · Distributed LLM inference',
   },
 ];
 
