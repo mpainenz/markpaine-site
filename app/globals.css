@@ -638,7 +638,7 @@ a.pill:focus-visible {
 
   .page {
     max-width: none;
-    padding: 0 53px 30px;
+    padding: 0 53px;
     min-height: 0;
     display: block;
   }
