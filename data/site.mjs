@@ -3,7 +3,7 @@ export const site = {
   domain: 'markpaine.dev',
   baseUrl: 'https://markpaine.dev',
   description:
-    'Senior CI/CD and platform engineer with 20 years building and operating high-availability telecom, cloud, and payment systems across AWS, Azure, and GCP.',
+    'Senior software and platform engineer building and operating business-critical applications and distributed services. Experience spans CRM, billing, service provisioning, cloud platforms and developer tooling, with hands-on responsibility from application design and coding through testing, deployment and production support.',
   location: 'Auckland, New Zealand',
   mobileLocation: 'Auckland, NZ',
   email: 'mpainenz@gmail.com',
