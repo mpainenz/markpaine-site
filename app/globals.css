@@ -645,9 +645,13 @@ a.pill:focus-visible {
   .print-break {
     break-before: page;
   }
+  .resume-content {
+    gap: 16px !important;
+  }
   .tombstones > div {
     flex: 1 1 0 !important;
     min-width: 0;
+    padding: 5px 20px !important;
   }
   /* Keep the PDF text order sequential for ATS extraction. */
   .credentials-layout,
@@ -660,8 +664,9 @@ a.pill:focus-visible {
   /* Narrow label column so long group names wrap and skills get the width */
   .page .skills-grid {
     grid-template-columns: 112px 1fr !important;
-    gap: 5px 18px !important;
+    gap: 3px 18px !important;
     padding: 10px 16px !important;
+    line-height: 1.4;
   }
   .page .education-list {
     display: grid !important;
@@ -674,7 +679,8 @@ a.pill:focus-visible {
     border-radius: 0;
   }
   .job-card {
-    padding: 0 0 14pt;
+    padding: 0 0 8pt;
+    gap: 7px;
     break-inside: avoid;
   }
   .job-blurb {
@@ -727,6 +733,7 @@ a.pill:focus-visible {
     border-bottom: 1.5pt solid #1a2537;
     padding-bottom: 3pt;
     margin: 8pt 0;
+    break-after: avoid;
   }
 
   .skills-grid > div,

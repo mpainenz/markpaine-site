@@ -55,14 +55,16 @@ export const experience: Job[] = [
   },
   {
     company: 'Solus Designs Limited',
-    role: 'Founder',
-    meta: '2011 —',
+    role: 'Founder & Software Engineer',
+    meta: '2011 — present',
     printBreak: true,
     blurb:
-      'Solus Designs is my independent AI systems company, building production machine-learning software and distributed LLM inference infrastructure.',
+      'Independent software business building AI applications and distributed systems, with responsibility across product design, development, testing and deployment.',
     bullets: [
-      'Designed and built TensorRelay, a Steam-distributed LLM inference platform using pipeline parallelism across heterogeneous consumer GPUs, with a Go control plane, custom Rust runtime, C++/llama.cpp stage execution, and Steam P2P transport',
-      'Implemented dynamic model-layer sharding, cluster scheduling and admission control, model artifact distribution, and an OpenAI-compatible API; deployed the private-beta backend to Kubernetes through GitHub Actions and Argo CD',
+      'Developing Ahoyhoy, a multi-tenant AI receptionist platform combining SIP telephony, OpenAI’s Realtime API and Agents SDK, a Next.js/React management portal and PostgreSQL-backed TypeScript services.',
+      'Built configurable call handling and business-knowledge ingestion and retrieval, using the Responses API, tool calling and structured outputs. Added automated conversation evaluations and checks against source information.',
+      'Designed and built TensorRelay, a Steam-distributed LLM inference platform using pipeline parallelism across heterogeneous consumer GPUs, with a Go control plane, custom Rust runtime, C++/llama.cpp execution and Steam P2P transport.',
+      'Implemented dynamic model-layer sharding, cluster scheduling, model distribution and an OpenAI-compatible API; deployed the private-beta backend to Kubernetes through GitHub Actions and Argo CD.',
     ],
   },
 ];
@@ -74,10 +76,10 @@ export const earlierRoles = [
 
 export const skills: { group: string; items: string }[] = [
   { group: 'Programming', items: 'C#/.NET · Python · SQL · Go · TypeScript · Rust · C++ · Java · Kotlin · Delphi' },
-  { group: 'Web', items: 'React · JavaScript · HTML · CSS · PHP' },
+  { group: 'Web', items: 'React · Next.js · Node.js · Fastify · JavaScript · HTML · CSS · PHP' },
   { group: 'APIs', items: 'REST · ConnectRPC · Protocol Buffers' },
   { group: 'Databases and caching', items: 'Microsoft SQL Server · PostgreSQL · MySQL · Aurora · Redis / Amazon ElastiCache · ClickHouse · TigerBeetle' },
-  { group: 'Testing', items: 'API · Integration · End-to-end · Regression · Load' },
+  { group: 'Testing', items: 'API · Integration · End-to-end · Regression · Load · LLM evaluation' },
   { group: 'Cloud', items: 'AWS · GCP · Azure' },
   { group: 'Containers and orchestration', items: 'Kubernetes · Docker · EKS · Helm · Kustomize · Linkerd' },
   { group: 'Infrastructure as Code', items: 'AWS CDK · Terraform · Pulumi' },
@@ -87,9 +89,14 @@ export const skills: { group: string; items: string }[] = [
   { group: 'Networking and voice', items: 'VoIP · SIP · SD-WAN · Cisco Meraki · VPCs · Subnetting · Routing · VPNs · Private endpoints · DNS · Load balancing' },
   { group: 'Agentic tools', items: 'Cursor · Claude Code · Amp · GrokBot' },
   {
-    group: 'AI / ML',
+    group: 'AI applications',
     items:
-      'Linear regression · MLOps · Model serving · RAG · Embeddings · Vector databases (Qdrant) · LangChain · LangGraph · Amazon Bedrock · MCP · Distributed LLM inference',
+      'OpenAI Responses and Realtime APIs · OpenAI Agents SDK · Tool calling · Structured outputs · RAG · MCP · LangChain · LangGraph · Amazon Bedrock',
+  },
+  {
+    group: 'ML and inference',
+    items:
+      'Linear regression · MLOps · Model serving · Embeddings · Vector databases (Qdrant) · Distributed LLM inference',
   },
 ];
 

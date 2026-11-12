@@ -23,7 +23,7 @@ export default function Resume() {
   ];
 
   return (
-    <main id="main-content" style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
+    <main id="main-content" className="resume-content" style={{ display: 'flex', flexDirection: 'column', gap: 26 }}>
       {/* Print-only letterhead: the on-screen identity lives in the nav/About, which print hides. */}
       <div className="print-only print-letterhead">
         <div className="name">{site.name}</div>

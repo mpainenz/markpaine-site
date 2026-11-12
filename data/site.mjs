@@ -12,7 +12,7 @@ export const site = {
   currentRole: 'Senior Platform Engineer',
   currentEmployer: null,
   currentFocus: 'Cloud, SRE & AI engineering',
-  founderSummary: 'Solus Designs Ltd — maker of Tensor Relay, distributed AI inference at scale',
+  founderSummary: 'Solus Designs Ltd · building Ahoyhoy and TensorRelay',
   historySummary: '20y telecom-grade backend @ One New Zealand',
   social: {
     github: 'https://github.com/mpainenz',
