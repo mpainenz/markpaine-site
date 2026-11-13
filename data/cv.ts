@@ -35,9 +35,10 @@ export const experience: Job[] = [
     role: 'Principal Developer',
     meta: 'Auckland · 2005 — 2025',
     intro:
-      'Joined WXC Communications as the second developer building Bandit, an in-house CRM, billing and service-provisioning platform. WXC was acquired by Vodafone NZ (now One NZ) in 2015, and Bandit became integral to One NZ’s business systems. Progressed from Junior Developer to Principal Developer, mentoring engineers through architecture guidance and code review.',
+      'Joined WXC Communications as the second developer building Bandit, an in-house CRM, billing and service-provisioning platform. WXC was acquired by Vodafone NZ (now One NZ) in 2015, and Bandit became integral to One NZ’s business systems. Progressed from Junior Developer to Principal Developer.',
     bullets: [
       'Wrote application code for Bandit’s desktop client, React/TypeScript staff and customer portals, and C#/.NET and Python backend services.',
+      'Led engineering work in small project teams within an Agile environment, allocating tasks, reviewing code and providing technical feedback while coordinating delivery with business stakeholders. Mentored and onboarded colleagues through practical guidance and show-and-tell sessions introducing engineering concepts and capabilities.',
       'Owned the architecture, maintenance and operation of Bandit’s AWS environment, helping evolve the platform from self-hosted client/server systems into containerised microservices and serverless components. Deployed services on ECS/Fargate and migrated large production databases.',
       'Designed and developed Bandit’s product and service billing functionality for different plans and billing models, including monthly recurring charges, variable charges and pro rata billing.',
       'Developed customer accounting and finance functionality, including ledger and transaction tables, invoicing, refunds, partial payments allocated across invoices, account transfers and reconciliation. Built financial and product reporting for finance teams and management.',
