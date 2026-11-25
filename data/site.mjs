@@ -21,7 +21,7 @@ export const site = {
   },
   repositoryUrl: 'https://github.com/mpainenz/markpaine-site',
   pdfPath: '/Mark-Paine-CV.pdf',
-  portraitPath: '/headshot.jpg',
+  portraitPath: '/mark-waterfront.png',
   footerDecoration: 'new-zealand',
   keywords: [
     ['Multi-Cloud', 'DevOps / SRE', 'Kubernetes', 'IaC'],
