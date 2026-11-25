@@ -135,7 +135,7 @@ export default function Resume() {
         </div>
       </section>
 
-      <section className="credentials-layout" style={{ display: 'flex', gap: 24, alignItems: 'stretch', flexWrap: 'wrap' }}>
+      <section className="credentials-layout" style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <section aria-labelledby="skills-heading" style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <h2 id="skills-heading" className="sr-only">Skills</h2>
           <div className="prompt-line mono">$ cat skills.yaml</div>
@@ -143,12 +143,12 @@ export default function Resume() {
           <dl
             className="panel skills-grid"
             style={{
+              margin: 0,
               padding: '16px 22px',
               display: 'grid',
               gridTemplateColumns: 'minmax(120px, max-content) 1fr',
               gap: '7px 18px',
               fontSize: 12.5,
-              flexGrow: 1,
               alignContent: 'start',
             }}
           >
@@ -168,7 +168,7 @@ export default function Resume() {
           <div className="print-only print-section-heading">EDUCATION</div>
           <ul
             className="panel education-list"
-            style={{ margin: 0, padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12.5, lineHeight: 1.55, flexGrow: 1, listStyle: 'none' }}
+            style={{ margin: 0, padding: '18px 22px', display: 'flex', flexDirection: 'column', gap: 12, fontSize: 12.5, lineHeight: 1.55, listStyle: 'none' }}
           >
             {education.map((e) => (
               <li key={e.title}>

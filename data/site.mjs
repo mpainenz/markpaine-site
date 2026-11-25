@@ -8,7 +8,7 @@ export const site = {
   mobileLocation: 'Auckland, NZ',
   email: 'mpainenz@gmail.com',
   prompt: 'mark@paine:~$',
-  status: 'Available',
+  status: 'Building',
   currentRole: 'Senior Platform Engineer',
   currentEmployer: null,
   currentFocus: 'Cloud, SRE & AI engineering',
