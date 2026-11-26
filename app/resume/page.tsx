@@ -26,6 +26,22 @@ function CompanyMark({ company }: { company: string }) {
   );
 }
 
+function CompanyHeading({ company, role, focus }: { company: string; role: string; focus?: string }) {
+  return (
+    <div className="company-heading">
+      <CompanyMark company={company} />
+      <div>
+        <h3 className="job-title">
+          {company}
+          <span className="job-sep"> · </span>
+          <span className="job-role">{role}</span>
+        </h3>
+        {focus && <div className="job-focus">{focus}</div>}
+      </div>
+    </div>
+  );
+}
+
 export default function Resume() {
   const printContacts = [
     { label: site.email, href: `mailto:${site.email}` },
@@ -111,17 +127,7 @@ export default function Resume() {
         {experience.map((job) => (
           <article key={job.company} id={job.company.toLowerCase().replaceAll(' ', '-')} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
             <div className="job-head">
-              <div className="company-heading">
-                <CompanyMark company={job.company} />
-                <div>
-                  <h3 className="job-title">
-                    {job.company}
-                    <span className="job-sep"> · </span>
-                    <span className="job-role">{job.role}</span>
-                  </h3>
-                  {job.focus && <div className="job-focus">{job.focus}</div>}
-                </div>
-              </div>
+              <CompanyHeading company={job.company} role={job.role} focus={job.focus} />
               {(job.meta || job.current) && (
                 <div className="job-meta">
                   {job.meta}
@@ -148,24 +154,18 @@ export default function Resume() {
           </article>
         ))}
         <div className="tombstones" id="earlier-experience">
-          {earlierRoles.map(({ company, positions, seeAlso }) => (
-            <div className="panel earlier-job" key={company}>
-              <CompanyMark company={company} />
-              <div className="earlier-job-details">
-                <strong>{company}</strong>
-                <ul>
-                  {positions.map(({ title, dates }) => (
-                    <li key={title}>
-                      <span className="earlier-position">
-                        <span>{title}</span>
-                        <span className="mono earlier-job-dates">{dates}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                {seeAlso && <small>(<a href={seeAlso.href}>{seeAlso.label}</a>)</small>}
-              </div>
-            </div>
+          {earlierRoles.map(({ company, positions: [primary, ...previous], seeAlso }) => (
+            <article className="panel earlier-job" key={company}>
+              <CompanyHeading company={company} role={primary.title} />
+              <span className="job-meta">{primary.dates}</span>
+              {previous.map(({ title, dates }) => (
+                <div className="earlier-position" key={title}>
+                  <span>{title}</span>
+                  <span className="job-meta">{dates}</span>
+                </div>
+              ))}
+              {seeAlso && <small>(<a href={seeAlso.href}>{seeAlso.label}</a>)</small>}
+            </article>
           ))}
         </div>
       </section>
