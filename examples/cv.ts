@@ -15,7 +15,7 @@ export const experience = [
 ];
 
 export const earlierRoles = [
-  { company: 'Earlier Company', role: 'Software Engineer', meta: '2019 — 2022' },
+  { company: 'Earlier Company', positions: [{ title: 'Software Engineer', dates: '2019 – 2022' }], seeAlso: undefined },
 ];
 
 export const skills = [

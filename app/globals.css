@@ -526,6 +526,77 @@ a.pill:focus-visible {
   flex-direction: column;
   gap: 10px;
 }
+.company-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+.company-mark {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: white;
+}
+.company-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.company-mark:has(> img[src$="/solus-designs.svg"]) {
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
+}
+.tombstones {
+  display: grid;
+  gap: 10px;
+}
+.earlier-job {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+}
+/* Historic artwork includes a white margin within the image itself. */
+.earlier-job .company-mark img { transform: scale(1.06); }
+.earlier-job-details {
+  display: grid;
+  gap: 2px;
+  color: var(--faint);
+  font-size: 13.5px;
+}
+.earlier-job-details strong { color: var(--text-soft); }
+.earlier-job-details ul { margin: 0; padding-left: 1.15em; list-style: disc; }
+.earlier-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.earlier-job-details small { margin-top: 2px; }
+.earlier-job-details small a { text-underline-offset: 2px; text-decoration: underline; }
+.job-card[id] { scroll-margin-top: 1rem; }
+.earlier-job-dates {
+  color: var(--faint);
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+@media (max-width: 520px) {
+  .earlier-job {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 3px 12px;
+    padding: 12px 14px;
+  }
+  .earlier-position { display: grid; gap: 0; }
+  .earlier-job-details li + li { margin-top: 5px; }
+}
 .job-head {
   display: flex;
   justify-content: space-between;
@@ -649,9 +720,8 @@ a.pill:focus-visible {
     gap: 16px !important;
   }
   .tombstones > div {
-    flex: 1 1 0 !important;
     min-width: 0;
-    padding: 5px 20px !important;
+    padding: 5px 20px;
   }
   /* Keep the PDF text order sequential for ATS extraction. */
   .credentials-layout,

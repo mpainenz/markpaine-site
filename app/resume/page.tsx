@@ -1,5 +1,7 @@
+import { companyMark } from '@/data/company-marks.mjs';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { site } from '@/data/site.mjs';
 import { experience, earlierRoles, skills, education, coreStrengths } from '@/data/cv';
 
@@ -13,6 +15,16 @@ export const metadata: Metadata = {
     url: '/resume/',
   },
 };
+
+function CompanyMark({ company }: { company: string }) {
+  const image = companyMark(company)?.image;
+  if (!image) return null;
+  return (
+    <span className="company-mark">
+      <Image src={`/cv-assets/companies/${image}`} alt="" width={36} height={36} unoptimized />
+    </span>
+  );
+}
 
 export default function Resume() {
   const printContacts = [
@@ -97,15 +109,18 @@ export default function Resume() {
         </div>
         <div className="print-only print-section-heading">EXPERIENCE</div>
         {experience.map((job) => (
-          <article key={job.company} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
+          <article key={job.company} id={job.company.toLowerCase().replaceAll(' ', '-')} className={`panel job-card${job.printBreak ? ' print-break' : ''}`}>
             <div className="job-head">
-              <div>
-                <h3 className="job-title">
-                  {job.company}
-                  <span className="job-sep"> · </span>
-                  <span className="job-role">{job.role}</span>
-                </h3>
-                {job.focus && <div className="job-focus">{job.focus}</div>}
+              <div className="company-heading">
+                <CompanyMark company={job.company} />
+                <div>
+                  <h3 className="job-title">
+                    {job.company}
+                    <span className="job-sep"> · </span>
+                    <span className="job-role">{job.role}</span>
+                  </h3>
+                  {job.focus && <div className="job-focus">{job.focus}</div>}
+                </div>
               </div>
               {(job.meta || job.current) && (
                 <div className="job-meta">
@@ -132,17 +147,24 @@ export default function Resume() {
             </ul>
           </article>
         ))}
-        <div className="tombstones" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          {earlierRoles.map((r) => (
-            <div
-              key={r.company}
-              className="panel"
-              style={{ flex: '1 1 300px', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}
-            >
-              <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--text-soft)' }}>
-                {r.company} <span style={{ color: 'var(--faint)', fontWeight: 400 }}>· {r.role}</span>
+        <div className="tombstones" id="earlier-experience">
+          {earlierRoles.map(({ company, positions, seeAlso }) => (
+            <div className="panel earlier-job" key={company}>
+              <CompanyMark company={company} />
+              <div className="earlier-job-details">
+                <strong>{company}</strong>
+                <ul>
+                  {positions.map(({ title, dates }) => (
+                    <li key={title}>
+                      <span className="earlier-position">
+                        <span>{title}</span>
+                        <span className="mono earlier-job-dates">{dates}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                {seeAlso && <small>(<a href={seeAlso.href}>{seeAlso.label}</a>)</small>}
               </div>
-              <div className="mono" style={{ fontSize: 11.5, color: 'var(--faint)', whiteSpace: 'nowrap' }}>{r.meta}</div>
             </div>
           ))}
         </div>

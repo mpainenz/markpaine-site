@@ -34,6 +34,25 @@ try {
       const response = await page.goto(`${staticServer.baseUrl}${route}`, { waitUntil: 'networkidle' });
       assert.equal(response?.status(), 200, `${route} did not load at ${viewport.name} size`);
 
+      if (route === '/') {
+        const status = page.locator('.status-line .val');
+        const current = page.locator('.whoami-body .k:text-is("Current:") + .v');
+        assert.equal(await status.innerText(), 'Building', 'The activity under the portrait must say Building');
+        assert.equal(await current.innerText(), 'Available', 'The current role panel must show job availability');
+      }
+
+      if (route === '/resume/') {
+        const marks = await page.locator('.company-mark').evaluateAll((logos) =>
+          logos.map((logo) => {
+            const { width, height } = logo.getBoundingClientRect();
+            return [width, height];
+          }),
+        );
+        assert.ok(marks.length >= 6, 'Expected logos for current and earlier experience');
+        assert.ok(marks.every(([width, height]) => width > 0 && width === height && width === marks[0][0]),
+          'Company logos should share the same square size');
+      }
+
       const overflow = await page.evaluate(() => ({
         document: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         body: document.body.scrollWidth - document.body.clientWidth,
