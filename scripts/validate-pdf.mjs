@@ -1,3 +1,4 @@
+import { experience, earlierRoles, skills, education, profile, coreStrengths } from '../data/cv.ts';
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -11,7 +12,7 @@ assert.ok(bytes.subarray(0, 5).equals(Buffer.from('%PDF-')), 'CV artifact is not
 assert.ok(fileStat.size >= 5_000, `CV PDF is unexpectedly small (${fileStat.size} bytes)`);
 
 const document = await getDocument({ data: new Uint8Array(bytes) }).promise;
-assert.ok(document.numPages >= 1 && document.numPages <= 5, `Unexpected CV page count: ${document.numPages}`);
+assert.ok(document.numPages === 3, `Unexpected CV page count: ${document.numPages}`);
 
 const pages = [];
 for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber += 1) {
@@ -25,17 +26,16 @@ for (const expected of ['Mark Paine', 'House of Doge', 'One New Zealand', 'mpain
   assert.ok(text.includes(expected), `CV PDF is missing expected text: ${expected}`);
 }
 
-const sections = [
-  { label: 'EXPERIENCE', pattern: /E\s*X\s*P\s*E\s*R\s*I\s*E\s*N\s*C\s*E/ },
-  { label: 'SKILLS', pattern: /S\s*K\s*I\s*L\s*L\s*S/ },
-  { label: 'EDUCATION', pattern: /E\s*D\s*U\s*C\s*A\s*T\s*I\s*O\s*N/ },
-  { label: 'References', pattern: /References available on request\./ },
-];
-let previousIndex = -1;
-for (const section of sections) {
-  const index = text.search(section.pattern);
-  assert.ok(index > previousIndex, `CV PDF section is missing or out of order: ${section.label}`);
-  previousIndex = index;
+const normalise = value => value.normalize('NFKC').replace(/[\s\u00ad]+/g, '');
+const fragments = [...profile, ...coreStrengths.flatMap(item => Object.values(item)),
+  ...skills.flatMap(item => Object.values(item)), ...education.flatMap(item => Object.values(item)),
+  ...earlierRoles.flatMap(item => Object.values(item)),
+  ...experience.flatMap(job => [job.company, job.role, job.meta, job.blurb, job.intro, ...job.bullets].filter(Boolean))];
+for (const fragment of fragments) assert.ok(normalise(text).includes(normalise(fragment)), `PDF missing shared content: ${fragment}`);
+const links = [];
+for (let i = 1; i <= document.numPages; i++) {
+  const page = await document.getPage(i);
+  links.push(...(await page.getAnnotations()).filter(item => item.subtype === 'Link').map(item => item.url));
 }
-
-console.log(`validated ${path.relative(process.cwd(), pdfPath)} (${document.numPages} pages, ${fileStat.size} bytes)`);
+for (const url of ['https://markpaine.dev/', 'https://www.linkedin.com/in/markpainenz/', 'https://one.nz/']) assert.ok(links.includes(url), `Missing PDF link: ${url}`);
+console.log(`validated ${path.relative(process.cwd(), pdfPath)} (${document.numPages} pages, shared content and links intact)`);

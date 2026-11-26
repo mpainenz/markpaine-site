@@ -1,7 +1,7 @@
 # 0001 — Next.js static export, print-CSS PDF, split-repo GitOps
 
 Date: 2026-08-22
-Status: accepted
+Status: amended by 0002 for PDF presentation
 
 ## Context
 
