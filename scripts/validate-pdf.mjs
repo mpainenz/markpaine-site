@@ -29,7 +29,7 @@ for (const expected of ['Mark Paine', 'House of Doge', 'One New Zealand', 'mpain
 const normalise = value => value.normalize('NFKC').replace(/[\s\u00ad]+/g, '');
 const fragments = [...profile, ...coreStrengths.flatMap(item => Object.values(item)),
   ...skills.flatMap(item => Object.values(item)), ...education.flatMap(item => Object.values(item)),
-  ...earlierRoles.flatMap(item => Object.values(item)),
+  ...earlierRoles.flatMap(({ company, positions, seeAlso }) => [company, ...positions.flatMap(({ title, dates }) => [title, dates]), ...(seeAlso ? [seeAlso.label] : [])]),
   ...experience.flatMap(job => [job.company, job.role, job.meta, job.blurb, job.intro, ...job.bullets].filter(Boolean))];
 for (const fragment of fragments) assert.ok(normalise(text).includes(normalise(fragment)), `PDF missing shared content: ${fragment}`);
 const links = [];

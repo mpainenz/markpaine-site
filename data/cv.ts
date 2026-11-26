@@ -32,10 +32,10 @@ export const experience: Job[] = [
   },
   {
     company: 'One New Zealand',
-    role: 'Principal Developer',
-    meta: 'Auckland · 2005 — 2025',
+    role: 'Senior Developer, then Principal Developer',
+    meta: 'Auckland · Aug 2015 — 2025',
     intro:
-      'Joined WXC Communications as the second developer building Bandit, an in-house CRM, billing and service-provisioning platform. WXC was acquired by Vodafone NZ (now One NZ) in 2015, and Bandit became integral to One NZ’s business systems. Progressed from Junior Developer to Principal Developer.',
+      'I was the second developer on Bandit, WxC’s CRM, billing and service provisioning platform. I continued building it at Sulaco Technology after WxC spun out its development team. Sulaco merged back into WxC in July 2015. I joined Vodafone NZ as a Senior Developer when it acquired the combined business that August and later progressed to Principal Developer.',
     bullets: [
       'Wrote application code for Bandit’s desktop client, React/TypeScript staff and customer portals, and C#/.NET and Python backend services.',
       'Led engineering work in small project teams within an Agile environment, allocating tasks, reviewing code and providing technical feedback while coordinating delivery with business stakeholders. Mentored and onboarded colleagues through practical guidance and show-and-tell sessions introducing engineering concepts and capabilities.',
@@ -71,8 +71,22 @@ export const experience: Job[] = [
 ];
 
 export const earlierRoles = [
-  { company: 'WXC Communications', role: 'Technical Support', meta: '2004 — 05' },
-  { company: 'iHug', role: 'Customer Services', meta: '2003 — 04' },
+  {
+    company: 'Sulaco Technology',
+    positions: [{ title: 'Senior Developer', dates: 'WxC transfer – July 2015' }],
+    seeAlso: { label: 'Development work listed under One New Zealand', href: '#one-new-zealand' },
+  },
+  {
+    company: 'WXC Communications',
+    positions: [
+      { title: 'Junior Developer', dates: '2005 – transfer to Sulaco' },
+      { title: 'Senior Technical Support Representative', dates: '2004 – 2005' },
+    ],
+  },
+  {
+    company: 'iHug',
+    positions: [{ title: 'Technical Support Representative', dates: '2003 – 2004' }],
+  },
 ];
 
 export const skills: { group: string; items: string }[] = [
@@ -102,7 +116,7 @@ export const skills: { group: string; items: string }[] = [
 ];
 
 export const education = [
-  { title: 'AWS Certified Developer — Associate', detail: 'Previously held' },
+  { title: 'AWS Certified Developer – Associate', detail: '2023–2026' },
   { title: 'B. Computing Systems', detail: 'Unitec · 2003 — 2005' },
 ];
 
@@ -126,6 +140,6 @@ export const coreStrengths: { title: string; description: string }[] = [
   },
   {
     "title": "AI & distributed systems",
-    "description": "AI applications, realtime voice agents, knowledge retrieval and distributed inference."
+    "description": "AI applications, real-time voice agents, knowledge retrieval and distributed inference. MCP services that give agents scoped, auditable access to production systems."
   }
 ];

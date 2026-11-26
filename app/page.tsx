@@ -10,7 +10,7 @@ const personJsonLd = {
   email: `mailto:${site.email}`,
   url: site.baseUrl,
   image: `${site.baseUrl}${site.portraitPath}`,
-  jobTitle: site.currentRole,
+  ...(site.currentRole ? { jobTitle: site.currentRole } : {}),
   ...(site.currentEmployer ? { worksFor: { '@type': 'Organization', name: site.currentEmployer } } : {}),
   sameAs: Object.values(site.social),
 };
@@ -69,13 +69,18 @@ export default function About() {
         <div className="whoami-body">
           <span className="k">Current:</span>
           <span className="v">
-            {site.currentRole}
-            {site.currentEmployer ? ` @ ${site.currentEmployer}` : ''}&nbsp;&nbsp;({site.currentFocus})
+            {site.currentRole ? (
+              <>
+                {site.currentRole}
+                {site.currentEmployer && ` @ ${site.currentEmployer}`}
+                {site.currentFocus && ` (${site.currentFocus})`}
+              </>
+            ) : 'Available'}
           </span>
           <span className="k">Founder:</span>
           <span className="v">{site.founderSummary}</span>
           <span className="k">History:</span>
-          <span className="v">{site.historySummary}</span>
+          <div className="v">{site.history.map((entry) => <div key={entry}>{entry}</div>)}</div>
         </div>
       </div>
     </main>

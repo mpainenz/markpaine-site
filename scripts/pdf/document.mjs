@@ -1,16 +1,11 @@
+import { companyMark } from '../../data/company-marks.mjs';
 export const esc = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 import {accentSVG} from './contours.mjs';
 const p = text => `<p>${esc(text)}</p>`;
-const companyAssets = {
- 'House of Doge':{image:'house-of-doge.png',initials:'HD',url:'https://www.houseofdoge.com/'},
- 'One New Zealand':{image:'one-nz-logo.png',initials:'NZ',url:'https://one.nz/'},
- 'Solus Designs Limited':{initials:'SD'},
- 'WXC Communications':{initials:'WXC'},
- 'iHug':{initials:'iH'},
-};
 function badge(company){
- const mark=companyAssets[company];
- return `<span class="company-badge ${mark.image?'image-badge':'initial-badge'}" aria-hidden="true">${mark.image?`<img src="/cv-assets/companies/${mark.image}" alt="" width="80" height="80">`:esc(mark.initials)}</span>`;
+ const mark=companyMark(company);
+ if(!mark) return '';
+ return `<span class="company-badge image-badge" aria-hidden="true"><img src="/cv-assets/companies/${mark.image}" alt="" width="80" height="80"></span>`;
 }
 function contactIcon(kind){
  const shapes={
@@ -34,7 +29,14 @@ function coreStrengths(data){
  const certification=data.education[0];
  return `<section class="core-strengths"><h2>Core strengths</h2>${data.contourStrengths.map(item=>`<div class="strength"><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>`).join('')}</section><section class="certification-line" aria-label="AWS certification"><p><strong>${esc(certification.title)}</strong><span>${esc(certification.detail)}</span></p></section>`;
 }
-function earlier(data){return `<section class="earlier"><h2>Earlier experience</h2>${data.earlierRoles.map(item=>`<div class="earlier-role">${badge(item.company)}<p><strong>${esc(item.company)}</strong><span>${esc(item.role)}</span><span>${esc(item.meta)}</span></p></div>`).join('')}</section><p class="references">References available on request.</p>`;}
+function earlier(data) {
+ const entries = data.earlierRoles.map(({ company, positions, seeAlso }) => {
+  const rows = positions.map(({ title, dates }) => `<li>${esc(title)}<span>${esc(dates)}</span></li>`).join('');
+  const note = seeAlso ? `<p>(${esc(seeAlso.label)})</p>` : '';
+  return `<div class="earlier-role">${badge(company)}<div class="earlier-copy"><strong>${esc(company)}</strong><ul>${rows}</ul>${note}</div></div>`;
+ });
+ return `<section class="earlier"><h2>Earlier experience</h2>${entries.join('')}</section><p class="references">References available on request.</p>`;
+}
 function profile(data,paragraphs=[data.site.description]){return `<section class="profile"><h2>Profile</h2>${paragraphs.map(p).join('')}</section>`;}
 function sidebar(data,index,type,includePortrait,theme){
  const contour=theme.id==='signal-contour';
@@ -54,7 +56,7 @@ function sidebar(data,index,type,includePortrait,theme){
 }
 function section(title){return `<h2 class="section-title">${esc(title)}</h2>`;}
 function job(item,{start=0,end=item.bullets.length,continued=false,links=false}={}){
- const url=links&&companyAssets[item.company]?.url;
+ const url=links&&companyMark(item.company)?.url;
  const name=url?`<a class="company-link" href="${esc(url)}">${esc(item.company)}</a>`:esc(item.company);
  return `<section class="job"><header class="job-head">${badge(item.company)}<div class="job-title"><h3>${name}</h3><p class="job-role">${esc(item.role)}</p><p class="job-meta">${esc(item.meta)}${continued?' · continued':''}</p>${item.focus&&!continued?`<p class="job-focus">${esc(item.focus)}</p>`:''}</div></header>${!continued?[item.blurb,item.intro].filter(Boolean).map(text=>`<p class="job-intro">${esc(text)}</p>`).join(''):''}${end>start?`<ul>${item.bullets.slice(start,end).map(text=>`<li>${esc(text)}</li>`).join('')}</ul>`:''}</section>`;
 }

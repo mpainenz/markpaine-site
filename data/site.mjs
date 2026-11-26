@@ -9,11 +9,14 @@ export const site = {
   email: 'mpainenz@gmail.com',
   prompt: 'mark@paine:~$',
   status: 'Building',
-  currentRole: 'Senior Platform Engineer',
+  currentRole: null,
   currentEmployer: null,
-  currentFocus: 'Cloud, SRE & AI engineering',
+  currentFocus: null,
   founderSummary: 'Solus Designs Ltd · building Ahoyhoy and TensorRelay',
-  historySummary: 'Telecom-grade backend & platforms @ One New Zealand',
+  history: [
+    'Senior Platform Engineer (Cloud, SRE & AI engineering)',
+    'Telecom-grade backend & platforms @ One New Zealand',
+  ],
   social: {
     github: 'https://github.com/mpainenz',
     linkedin: 'https://www.linkedin.com/in/markpainenz/',
