@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { site, keywordLinks } from '@/data/site.mjs';
+import { profile } from '@/data/cv';
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -25,7 +26,9 @@ export default function About() {
       <div style={{ display: 'flex', gap: 36, alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 380px', display: 'flex', flexDirection: 'column', gap: 15 }}>
           <h1 className="hero-name">{site.name}</h1>
-          <p style={{ fontSize: 15.5, color: 'var(--text-soft)', maxWidth: '40ch', margin: 0 }}>{site.description}</p>
+          <div className="home-profile">
+            {profile.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
           <div className="pill-rows" style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
             {site.keywords.map((row, i) => (
               <div key={i} style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>

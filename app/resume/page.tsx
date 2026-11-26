@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { site } from '@/data/site.mjs';
-import { experience, earlierRoles, skills, education, profile, coreStrengths } from '@/data/cv';
+import { experience, earlierRoles, skills, education, coreStrengths } from '@/data/cv';
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -77,19 +77,17 @@ export default function Resume() {
         </div>
       </header>
 
-      <section className="panel resume-profile no-print" aria-labelledby="profile-heading">
-        <h2 id="profile-heading">Profile</h2>
-        {profile.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-      </section>
-      <section className="no-print" aria-labelledby="strengths-heading">
-        <h2 id="strengths-heading" className="resume-section-title">Core strengths</h2>
-        <div className="strengths-grid">
+      <section className="resume-strengths no-print" aria-labelledby="strengths-heading">
+        <h2 id="strengths-heading" className="sr-only">Core strengths</h2>
+        <div className="prompt-line mono" aria-hidden="true">$ cat strengths.md</div>
+        <dl className="panel strengths-list">
           {coreStrengths.map((strength) => (
-            <article className="panel strength-card" key={strength.title}>
-              <h3>{strength.title}</h3><p>{strength.description}</p>
-            </article>
+            <div key={strength.title}>
+              <dt>{strength.title}</dt>
+              <dd>{strength.description}</dd>
+            </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       <section aria-labelledby="experience-heading" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
