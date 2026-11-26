@@ -4,6 +4,8 @@
 .signal-contour .sheet{padding-left:9mm}
 .signal-contour .document-grid,.signal-contour .letter .document-grid{grid-template-columns:61mm minmax(0,1fr);gap:12mm}
 .signal-contour .panel-art{left:0;top:0;bottom:0;width:76mm;background:var(--navy);border-top-right-radius:32mm;overflow:hidden}
+/* Continuation pages extend the first page's left panel without restarting its curve. */
+.signal-contour .cv:not(.page-1) .panel-art{border-top-right-radius:0}
 .signal-contour .side-panel,.signal-contour .letter .side-panel{padding:5mm 4mm 5mm 3mm}
 .signal-contour .page-1 .portrait-wrap{width:76mm;margin:-18mm -12mm 8mm}
 .signal-contour .page-1 .portrait{height:58mm;aspect-ratio:auto;border-radius:0 32mm 0 0;object-position:50% 40%;border-bottom:1.3mm solid var(--mint)}
