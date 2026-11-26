@@ -41,7 +41,7 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Render CV PDF from print stylesheet
+      - name: Render Contour CV from shared content
         run: npm run pdf
 
       - name: Validate CV PDF

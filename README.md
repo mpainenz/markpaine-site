@@ -12,9 +12,7 @@ and Docker.
 
 ![Desktop view of the CV site](docs/images/site-desktop.png)
 
-The resume page is the source for both the website and the PDF. Playwright
-prints `/resume/` with the production print stylesheet, keeping the two formats
-in sync.
+The website and PDF share career content in `data/cv.ts`. Playwright renders a dedicated Contour print page at `/print/resume/`, preserving the three-page document design while the résumé page adapts to screen size.
 
 ## Features
 
@@ -23,7 +21,7 @@ in sync.
 - Separate career content in `data/cv.ts`.
 - Responsive dark and light themes with accessible navigation.
 - Search metadata, JSON-LD, sitemap, robots policy, and custom 404.
-- A4 PDF generation with content and reading-order validation.
+- A4 Contour PDF generation with shared-content, layout, and link validation.
 - Automated lint, type, configuration, responsive, link, and accessibility checks.
 - Clean-checkout, unprivileged nginx container build with security headers.
 - Optional production-only, cookieless Umami analytics through a same-origin collector.
@@ -71,8 +69,8 @@ npm run lint       # ESLint
 npm run typecheck  # TypeScript without emitting files
 npm test           # configuration tests
 npm run build      # static export to out/
-npm run pdf        # render the CV PDF from the built resume
-npm run pdf:check  # validate PDF structure, content, and section order
+npm run pdf        # render the Contour CV from shared content
+npm run pdf:check  # validate three pages, shared content, and links
 npm run test:site  # responsive, link, route, and accessibility checks
 npm run verify     # run the full local/CI quality gate
 ```
@@ -126,7 +124,7 @@ sizes.
 Key paths:
 
 - `data/site.mjs` — identity, URLs, homepage copy, assets, and display options.
-- `data/cv.ts` — experience, skills, education, and earlier roles.
+- `data/cv.ts` — profile, core strengths, experience, skills, education, and earlier roles.
 - `app/` — pages, metadata routes, global styles, and print layout.
 - `components/` — navigation, footer, theme, and clipboard interaction.
 - `scripts/` — static server, PDF generation/validation, and browser checks.

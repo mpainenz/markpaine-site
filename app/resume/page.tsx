@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { site } from '@/data/site.mjs';
-import { experience, earlierRoles, skills, education } from '@/data/cv';
+import { experience, earlierRoles, skills, education, profile, coreStrengths } from '@/data/cv';
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -76,6 +76,21 @@ export default function Resume() {
           {site.keywords[1].join(' · ')}
         </div>
       </header>
+
+      <section className="panel resume-profile no-print" aria-labelledby="profile-heading">
+        <h2 id="profile-heading">Profile</h2>
+        {profile.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      </section>
+      <section className="no-print" aria-labelledby="strengths-heading">
+        <h2 id="strengths-heading" className="resume-section-title">Core strengths</h2>
+        <div className="strengths-grid">
+          {coreStrengths.map((strength) => (
+            <article className="panel strength-card" key={strength.title}>
+              <h3>{strength.title}</h3><p>{strength.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section aria-labelledby="experience-heading" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         <h2 id="experience-heading" className="sr-only">Experience</h2>

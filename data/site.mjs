@@ -3,7 +3,7 @@ export const site = {
   domain: 'markpaine.dev',
   baseUrl: 'https://markpaine.dev',
   description:
-    'Senior software and platform engineer building and operating business-critical applications and distributed services. Experience spans CRM, billing, service provisioning, cloud platforms and developer tooling, with hands-on responsibility from application design and coding through testing, deployment and production support.',
+    'Software and platform engineer focused on AWS, backend development and AI products. I enjoy collaborating in small teams, taking technical ownership and building reliable software together.',
   location: 'Auckland, New Zealand',
   mobileLocation: 'Auckland, NZ',
   email: 'mpainenz@gmail.com',
@@ -13,7 +13,7 @@ export const site = {
   currentEmployer: null,
   currentFocus: 'Cloud, SRE & AI engineering',
   founderSummary: 'Solus Designs Ltd · building Ahoyhoy and TensorRelay',
-  historySummary: '20y telecom-grade backend @ One New Zealand',
+  historySummary: 'Telecom-grade backend & platforms @ One New Zealand',
   social: {
     github: 'https://github.com/mpainenz',
     linkedin: 'https://www.linkedin.com/in/markpainenz/',

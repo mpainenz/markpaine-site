@@ -741,3 +741,14 @@ a.pill:focus-visible {
     break-inside: avoid;
   }
 }
+
+/* Shared CV content, presented for responsive screen reading. */
+.resume-profile { padding: 24px; }
+.resume-profile h2, .resume-section-title { font-size: 20px; margin: 0 0 16px; color: var(--text); }
+.resume-profile p { max-width: 85ch; line-height: 1.7; color: var(--text-soft); }
+.resume-profile p:last-child { margin-bottom: 0; }
+.strengths-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.strength-card { padding: 20px 24px; }
+.strength-card h3 { margin: 0 0 10px; font-size: 16px; color: var(--accent); }
+.strength-card p { margin: 0; line-height: 1.65; color: var(--text-soft); }
+@media (max-width: 640px) { .strengths-grid { grid-template-columns: 1fr; } }

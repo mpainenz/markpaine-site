@@ -82,7 +82,7 @@ export const skills: { group: string; items: string }[] = [
   { group: 'Databases and caching', items: 'Microsoft SQL Server · PostgreSQL · MySQL · Aurora · Redis / Amazon ElastiCache · ClickHouse · TigerBeetle' },
   { group: 'Testing', items: 'API · Integration · End-to-end · Regression · Load · LLM evaluation' },
   { group: 'Cloud', items: 'AWS · GCP · Azure' },
-  { group: 'Containers and orchestration', items: 'Kubernetes · Docker · EKS · Helm · Kustomize · Linkerd' },
+  { group: 'Systems & containers', items: 'Linux · Kubernetes · Docker · EKS · Helm · Kustomize · Linkerd' },
   { group: 'Infrastructure as Code', items: 'AWS CDK · Terraform · Pulumi' },
   { group: 'CI/CD and GitOps', items: 'GitHub Actions · GitLab CI/CD · Argo CD' },
   { group: 'Observability', items: 'OpenTelemetry · Prometheus · Alertmanager · Grafana · Loki · Honeycomb · Sentry · AWS CloudWatch · Azure Monitor · Datadog' },
@@ -102,6 +102,30 @@ export const skills: { group: string; items: string }[] = [
 ];
 
 export const education = [
-  { title: 'AWS Certified Developer — Associate', detail: 'Active' },
+  { title: 'AWS Certified Developer — Associate', detail: 'Previously held' },
   { title: 'B. Computing Systems', detail: 'Unitec · 2003 — 2005' },
+];
+
+export const profile: string[] = [
+  "I’m a software and platform engineer who enjoys working in small, close-knit teams. I value sharing ideas, collaborating with colleagues and building software together, and I’m comfortable taking the technical lead.",
+  "My platform experience centres on AWS, where I’ve led the design, build and operational support of production environments and delivery tooling. Alongside that, I’ve developed business applications, AI products and distributed services. I’m looking for a hands-on senior engineering or team lead role where I can stay close to the code, take ownership and contribute to a positive team culture."
+];
+
+export const coreStrengths: { title: string; description: string }[] = [
+  {
+    "title": "AWS & platform engineering",
+    "description": "Cloud architecture, Linux and container platforms, infrastructure automation and production ownership."
+  },
+  {
+    "title": "Software & product development",
+    "description": "Backend engineering, service integrations and full-stack applications, from business platforms to customer-facing products."
+  },
+  {
+    "title": "Delivery & reliability",
+    "description": "Self-service deployments, GitOps, automated testing and observability."
+  },
+  {
+    "title": "AI & distributed systems",
+    "description": "AI applications, realtime voice agents, knowledge retrieval and distributed inference."
+  }
 ];
