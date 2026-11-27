@@ -5,7 +5,7 @@ import { chromium } from 'playwright';
 import { startStaticServer } from './static-server.mjs';
 
 import { site } from '../data/site.mjs';
-import { experience, earlierRoles, skills, education, profile, coreStrengths } from '../data/cv.ts';
+import { experience, earlierGroups, skills, education, profile, coreStrengths } from '../data/cv.ts';
 import { signalDocumentHTML } from './pdf/document.mjs';
 
 const OUT = path.resolve('out');
@@ -23,7 +23,7 @@ if (PDF !== OUT && !PDF.startsWith(`${OUT}${path.sep}`)) {
 const printDirectory = path.join(OUT, 'print/resume');
 await mkdir(printDirectory, { recursive: true });
 await writeFile(path.join(printDirectory, 'index.html'), signalDocumentHTML(
-  { site, experience, earlierRoles, skills, education, contourProfile: profile, contourStrengths: coreStrengths },
+  { site, experience, earlierGroups, skills, education, contourProfile: profile, contourStrengths: coreStrengths },
   { id: 'signal-contour', name: 'Signal Contour', layout: 'left', heading: 'DM Sans', body: 'DM Sans', accentPattern: 'topography' },
   'cv',
 ));

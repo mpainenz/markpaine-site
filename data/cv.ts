@@ -73,7 +73,6 @@ export const experience: Job[] = [
 type EarlierEmployer = {
   company: string;
   positions: { title: string; dates: string }[];
-  seeAlso?: { label: string; href: string };
 };
 
 type EarlierGroup = {
@@ -89,7 +88,6 @@ export const earlierGroups: EarlierGroup[] = [
       {
         company: 'Sulaco Technology',
         positions: [{ title: 'Senior Developer', dates: 'WxC transfer – July 2015' }],
-        seeAlso: { label: 'Development work listed under One New Zealand', href: '#one-new-zealand' },
       },
       {
         company: 'WXC Communications',
@@ -111,8 +109,6 @@ export const earlierGroups: EarlierGroup[] = [
     ],
   },
 ];
-
-export const earlierRoles = earlierGroups.flatMap(({ employers }) => employers);
 
 export const skills: { group: string; items: string }[] = [
   { group: 'Programming', items: 'C#/.NET · Python · SQL · Go · TypeScript · Rust · C++ · Java · Kotlin · Delphi' },

@@ -30,10 +30,19 @@ function coreStrengths(data){
  return `<section class="core-strengths"><h2>Core strengths</h2>${data.contourStrengths.map(item=>`<div class="strength"><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></div>`).join('')}</section><section class="certification-line" aria-label="AWS certification"><p><strong>${esc(certification.title)}</strong><span>${esc(certification.detail)}</span></p></section>`;
 }
 function earlier(data) {
- const entries = data.earlierRoles.map(({ company, positions, seeAlso }) => {
-  const rows = positions.map(({ title, dates }) => `<li>${esc(title)}<span>${esc(dates)}</span></li>`).join('');
-  const note = seeAlso ? `<p>(${esc(seeAlso.label)})</p>` : '';
-  return `<div class="earlier-role">${badge(company)}<div class="earlier-copy"><strong>${esc(company)}</strong><ul>${rows}</ul>${note}</div></div>`;
+ const entries = data.earlierGroups.map(({ dates, employers, continuation }) => {
+   const range = dates ? `<p class="earlier-range">${esc(dates)}</p>` : '';
+   const roles = employers.map(({ company, positions }) => {
+     const rows = positions.map(({ title, dates: years }, index) => {
+       const period = dates && index === 0 ? '' : `<span>${esc(years)}</span>`;
+       return `<li>${esc(title)}${period}</li>`;
+     }).join('');
+     return `<div class="earlier-role">${badge(company)}<div class="earlier-copy"><strong>${esc(company)}</strong><ul>${rows}</ul></div></div>`;
+   }).join('');
+   const note = continuation
+     ? `<p class="earlier-continuation">${esc(continuation.text)} <a href="${esc(new URL('/resume/' + continuation.href, data.site.baseUrl).href)}">${esc(continuation.label)}</a>.</p>`
+     : '';
+   return `<div class="earlier-group">${range}${roles}${note}</div>`;
  });
  return `<section class="earlier"><h2>Earlier experience</h2>${entries.join('')}</section><p class="references">References available on request.</p>`;
 }
