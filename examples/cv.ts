@@ -24,8 +24,6 @@ export const earlierGroups = [
   },
 ];
 
-export const earlierRoles = earlierGroups.flatMap(({ employers }) => employers);
-
 export const skills = [
   { group: 'Cloud', items: 'AWS · Azure · GCP' },
   { group: 'Delivery', items: 'GitHub Actions · Argo CD · Terraform' },

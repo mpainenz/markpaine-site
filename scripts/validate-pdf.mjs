@@ -1,4 +1,4 @@
-import { experience, earlierRoles, skills, education, profile, coreStrengths } from '../data/cv.ts';
+import { experience, earlierGroups, skills, education, profile, coreStrengths } from '../data/cv.ts';
 import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -29,7 +29,12 @@ for (const expected of ['Mark Paine', 'House of Doge', 'One New Zealand', 'mpain
 const normalise = value => value.normalize('NFKC').replace(/[\s\u00ad]+/g, '');
 const fragments = [...profile, ...coreStrengths.flatMap(item => Object.values(item)),
   ...skills.flatMap(item => Object.values(item)), ...education.flatMap(item => Object.values(item)),
-  ...earlierRoles.flatMap(({ company, positions, seeAlso }) => [company, ...positions.flatMap(({ title, dates }) => [title, dates]), ...(seeAlso ? [seeAlso.label] : [])]),
+  ...earlierGroups.flatMap(({ dates, employers, continuation }) => [
+    ...(dates ? [dates] : []),
+    ...employers.flatMap(({ company, positions }) => [company, ...positions.flatMap((role, index) =>
+      dates && index === 0 ? [role.title] : [role.title, role.dates])]),
+    ...(continuation ? [continuation.text, continuation.label] : []),
+  ]),
   ...experience.flatMap(job => [job.company, job.role, job.meta, job.blurb, job.intro, ...job.bullets].filter(Boolean))];
 for (const fragment of fragments) assert.ok(normalise(text).includes(normalise(fragment)), `PDF missing shared content: ${fragment}`);
 const links = [];
@@ -37,5 +42,5 @@ for (let i = 1; i <= document.numPages; i++) {
   const page = await document.getPage(i);
   links.push(...(await page.getAnnotations()).filter(item => item.subtype === 'Link').map(item => item.url));
 }
-for (const url of ['https://markpaine.dev/', 'https://www.linkedin.com/in/markpainenz/', 'https://one.nz/']) assert.ok(links.includes(url), `Missing PDF link: ${url}`);
+for (const url of ['https://markpaine.dev/', 'https://www.linkedin.com/in/markpainenz/', 'https://one.nz/', 'https://markpaine.dev/resume/#one-new-zealand']) assert.ok(links.includes(url), `Missing PDF link: ${url}`);
 console.log(`validated ${path.relative(process.cwd(), pdfPath)} (${document.numPages} pages, shared content and links intact)`);
