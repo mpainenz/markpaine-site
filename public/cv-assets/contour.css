@@ -61,3 +61,11 @@
 .earlier-range{font-size:7.6pt;font-weight:600;color:#c7e9d5}
 .earlier-continuation{margin-top:2.8mm;font-size:7.4pt;line-height:1.4}
 .folio-references{margin-right:auto;font:7.5pt var(--body),sans-serif;letter-spacing:normal}
+
+/* Connect the earlier employers in chronological order along the logo column. */
+.earlier{position:relative;isolation:isolate}
+.earlier-group:first-of-type .earlier-role:first-of-type > :first-child{anchor-name:--career-start}
+.earlier-group:last-child .earlier-role:last-of-type > :first-child{anchor-name:--career-end}
+.earlier::before{content:"";position:absolute;z-index:-1;left:5mm;top:anchor(--career-start center);bottom:anchor(--career-end center);border-left:.55pt solid #779a98}
+.earlier-group+.earlier-group{border-top:0}
+.earlier-continuation{margin-left:12.5mm}
