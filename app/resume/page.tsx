@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { site } from '@/data/site.mjs';
-import { experience, earlierRoles, skills, education, coreStrengths } from '@/data/cv';
+import { experience, earlierGroups, skills, education, coreStrengths } from '@/data/cv';
 
 export const metadata: Metadata = {
   title: 'Resume',
@@ -154,17 +154,26 @@ export default function Resume() {
           </article>
         ))}
         <div className="tombstones" id="earlier-experience">
-          {earlierRoles.map(({ company, positions: [primary, ...previous], seeAlso }) => (
-            <article className="panel earlier-job" key={company}>
-              <CompanyHeading company={company} role={primary.title} />
-              <span className="job-meta">{primary.dates}</span>
-              {previous.map(({ title, dates }) => (
-                <div className="earlier-position" key={title}>
-                  <span>{title}</span>
-                  <span className="job-meta">{dates}</span>
+          {earlierGroups.map(({ dates, employers, continuation }) => (
+            <article className="panel earlier-group" key={employers[0].company}>
+              {dates && <div className="job-meta">{dates}</div>}
+              {employers.map(({ company, positions: [primary, ...previous] }) => (
+                <div className="earlier-job" key={company}>
+                  <CompanyHeading company={company} role={primary.title} />
+                  {!dates && <span className="job-meta">{primary.dates}</span>}
+                  {previous.map(({ title, dates: roleDates }) => (
+                    <div className="earlier-position" key={title}>
+                      <span>{title}</span>
+                      <span className="job-meta">{roleDates}</span>
+                    </div>
+                  ))}
                 </div>
               ))}
-              {seeAlso && <small>(<a href={seeAlso.href}>{seeAlso.label}</a>)</small>}
+              {continuation && (
+                <p className="career-continuation">
+                  {continuation.text} <a href={continuation.href}>{continuation.label}</a>.
+                </p>
+              )}
             </article>
           ))}
         </div>
