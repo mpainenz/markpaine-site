@@ -35,16 +35,16 @@ function earlier(data) {
    const roles = employers.map(({ company, positions }) => {
      const rows = positions.map(({ title, dates: years }, index) => {
        const period = dates && index === 0 ? '' : `<span>${esc(years)}</span>`;
-       return `<li>${esc(title)}${period}</li>`;
+       return `<p class="early-position">${esc(title)}${period}</p>`;
      }).join('');
-     return `<div class="earlier-role">${badge(company)}<div class="earlier-copy"><strong>${esc(company)}</strong><ul>${rows}</ul></div></div>`;
+     return `<div class="earlier-role">${badge(company)}<div class="earlier-copy"><strong>${esc(company)}</strong>${rows}</div></div>`;
    }).join('');
    const note = continuation
-     ? `<p class="earlier-continuation">${esc(continuation.text)} <a href="${esc(new URL('/resume/' + continuation.href, data.site.baseUrl).href)}">${esc(continuation.label)}</a>.</p>`
+     ? `<p class="earlier-continuation">${esc(continuation.text)}</p>`
      : '';
    return `<div class="earlier-group">${range}${roles}${note}</div>`;
  });
- return `<section class="earlier"><h2>Earlier experience</h2>${entries.join('')}</section><p class="references">References available on request.</p>`;
+ return `<section class="earlier"><h2>Earlier experience</h2>${entries.join('')}</section>`;
 }
 function profile(data,paragraphs=[data.site.description]){return `<section class="profile"><h2>Profile</h2>${paragraphs.map(p).join('')}</section>`;}
 function sidebar(data,index,type,includePortrait,theme){
@@ -75,7 +75,8 @@ function sheet(data,theme,index,type,main){
  const artwork=contour?`<div class="panel-art" aria-hidden="true">${circle}</div>`:`<div class="panel-art" aria-hidden="true"></div>${circle}`;
  const masthead=first&&banner?`<header class="masthead" data-bounds>${identity(data)}${portrait()}</header>`:'';
  const mainHead=first&&!banner?`<header class="masthead">${identity(data)}</header>`:!first?`<header class="running"><strong>${esc(data.site.name)}</strong>${contour?'':`<span>${index===2?'Experience':'Projects & capabilities'}</span>`}</header>`:'';
- return `<article class="sheet ${type} page-${index} layout-${theme.layout}" aria-label="${type==='cv'?'CV':'Cover letter'} page ${index}">${artwork}<div class="sheet-content">${masthead}<div class="document-grid">${sidebar(data,index,type,first&&!banner,theme)}<div class="main-panel" data-bounds>${mainHead}${main}</div></div></div><footer class="folio">${contour?'':'<span>markpaine.dev</span>'}<span>${index} / ${type==='cv'?3:1}</span></footer></article>`;
+ const references = type === 'cv' && index === 3 ? '<span class="folio-references">References available on request.</span>' : '';
+ return `<article class="sheet ${type} page-${index} layout-${theme.layout}" aria-label="${type==='cv'?'CV':'Cover letter'} page ${index}">${artwork}<div class="sheet-content">${masthead}<div class="document-grid">${sidebar(data,index,type,first&&!banner,theme)}<div class="main-panel" data-bounds>${mainHead}${main}</div></div></div><footer class="folio">${references}${contour?'':'<span>markpaine.dev</span>'}<span>${index} / ${type==='cv'?3:1}</span></footer></article>`;
 }
 export function signalDocumentHTML(data,theme,type){
  let pages;
