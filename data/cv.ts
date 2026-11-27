@@ -99,7 +99,7 @@ export const earlierGroups: EarlierGroup[] = [
       },
     ],
     continuation: {
-      text: 'I continued as a developer at One NZ (then Vodafone NZ) after it acquired the combined WxC and Sulaco business in 2015.',
+      text: 'WxC / Sulaco acquired by Vodafone NZ (now One NZ) in 2015.',
       label: 'See One NZ',
       href: '#one-new-zealand',
     },
