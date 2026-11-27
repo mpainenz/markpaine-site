@@ -33,14 +33,16 @@ const fragments = [...profile, ...coreStrengths.flatMap(item => Object.values(it
     ...(dates ? [dates] : []),
     ...employers.flatMap(({ company, positions }) => [company, ...positions.flatMap((role, index) =>
       dates && index === 0 ? [role.title] : [role.title, role.dates])]),
-    ...(continuation ? [continuation.text, continuation.label] : []),
+    ...(continuation ? [continuation.text] : []),
   ]),
   ...experience.flatMap(job => [job.company, job.role, job.meta, job.blurb, job.intro, ...job.bullets].filter(Boolean))];
 for (const fragment of fragments) assert.ok(normalise(text).includes(normalise(fragment)), `PDF missing shared content: ${fragment}`);
+assert.doesNotMatch(text, /See One NZ/);
+assert.match(pages[2], /References available on request\./);
 const links = [];
 for (let i = 1; i <= document.numPages; i++) {
   const page = await document.getPage(i);
   links.push(...(await page.getAnnotations()).filter(item => item.subtype === 'Link').map(item => item.url));
 }
-for (const url of ['https://markpaine.dev/', 'https://www.linkedin.com/in/markpainenz/', 'https://one.nz/', 'https://markpaine.dev/resume/#one-new-zealand']) assert.ok(links.includes(url), `Missing PDF link: ${url}`);
+for (const url of ['https://markpaine.dev/', 'https://www.linkedin.com/in/markpainenz/', 'https://one.nz/']) assert.ok(links.includes(url), `Missing PDF link: ${url}`);
 console.log(`validated ${path.relative(process.cwd(), pdfPath)} (${document.numPages} pages, shared content and links intact)`);

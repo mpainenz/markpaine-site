@@ -51,12 +51,13 @@
 .signal-contour .terrain-accent img{display:block;width:100%;height:100%}
 .signal-contour .terrain-credit{position:absolute;left:6mm;bottom:2mm;padding:.6mm 1mm;background:#101a2bea;color:#b9d8c7;font:5.5pt/1.3 'Inter',sans-serif;letter-spacing:.1pt}
 .job-head > .job-title:only-child{grid-column:1 / -1}
-.earlier-copy{grid-column:2;font-size:7.4pt;line-height:1.35}
-.earlier-copy ul{padding-left:1em;margin:.45mm 0 0}
-.earlier-copy li+li{margin-top:.65mm}
-.earlier-copy li span{display:block;color:#d6e1e7}
-.earlier-group+.earlier-group{margin-top:3mm;padding-top:2mm;border-top:.5pt solid #69837c}
-.earlier-group .earlier-role{margin-top:2.1mm}
+.earlier-copy{grid-column:2;line-height:1.35}
+.earlier-copy strong{display:block;font-size:8pt;color:#fff}
+.earlier-copy .early-position{font-size:7.6pt;line-height:1.35;margin-top:.65mm}
+.earlier-copy .early-position+.early-position{margin-top:1.4mm}
+.early-position span{display:block;font-size:7pt;color:#c1d1df}
+.earlier-group+.earlier-group{margin-top:3mm;padding-top:2.5mm;border-top:.5pt solid #69837c}
+.earlier-group .earlier-role{align-items:start;margin-top:2.5mm}
 .earlier-range{font-size:7.6pt;font-weight:600;color:#c7e9d5}
-.earlier-continuation{margin-top:2.3mm;font-size:7.4pt;line-height:1.4}
-.earlier-continuation a{color:#c7e9d5;text-decoration:underline}
+.earlier-continuation{margin-top:2.8mm;font-size:7.4pt;line-height:1.4}
+.folio-references{margin-right:auto;font:7.5pt var(--body),sans-serif;letter-spacing:normal}
