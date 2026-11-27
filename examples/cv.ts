@@ -14,9 +14,17 @@ export const experience = [
   },
 ];
 
-export const earlierRoles = [
-  { company: 'Earlier Company', positions: [{ title: 'Software Engineer', dates: '2019 – 2022' }], seeAlso: undefined },
+export const earlierGroups = [
+  {
+    dates: '2019 – 2022',
+    continuation: { text: 'I continued developing the platform at Example Company.', label: 'See Example Company', href: '#example-company' },
+    employers: [
+      { company: 'Earlier Company', positions: [{ title: 'Software Engineer', dates: '2019 – 2022' }] },
+    ],
+  },
 ];
+
+export const earlierRoles = earlierGroups.flatMap(({ employers }) => employers);
 
 export const skills = [
   { group: 'Cloud', items: 'AWS · Azure · GCP' },

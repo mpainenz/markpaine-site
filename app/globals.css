@@ -557,29 +557,33 @@ a.pill:focus-visible {
   display: grid;
   gap: 10px;
 }
+.earlier-group {
+  display: grid;
+  gap: 12px;
+  padding: 14px 24px;
+}
 .earlier-job {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 6px 12px;
-  padding: 14px 24px;
 }
 .earlier-job .job-meta { text-align: right; }
 /* Historic artwork includes a white margin within the image itself. */
 .earlier-job .company-mark img { transform: scale(1.06); }
-.earlier-position,
-.earlier-job small {
+.earlier-position {
   grid-column: 1 / -1;
   padding-inline-start: calc(2.25rem + 0.7rem);
   color: var(--muted);
-}
-.earlier-position {
   display: grid;
   grid-template-columns: subgrid;
   align-items: baseline;
   font-size: 13.5px;
 }
-.earlier-job small a { text-underline-offset: 2px; text-decoration: underline; }
+.earlier-job + .earlier-job,
+.career-continuation { border-top: 1px solid var(--border); padding-top: 12px; }
+.career-continuation { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.career-continuation a { text-underline-offset: 2px; text-decoration: underline; }
 .job-card[id], #earlier-experience { scroll-margin-top: 6rem; }
 @media (max-width: 720px) {
   .earlier-job { grid-template-columns: minmax(0, 1fr); }
@@ -709,7 +713,7 @@ a.pill:focus-visible {
   .resume-content {
     gap: 16px !important;
   }
-  .tombstones > .earlier-job {
+  .tombstones > .earlier-group {
     min-width: 0;
     padding: 5px 20px;
   }

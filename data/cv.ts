@@ -70,24 +70,49 @@ export const experience: Job[] = [
   },
 ];
 
-export const earlierRoles = [
+type EarlierEmployer = {
+  company: string;
+  positions: { title: string; dates: string }[];
+  seeAlso?: { label: string; href: string };
+};
+
+type EarlierGroup = {
+  dates?: string;
+  continuation?: { text: string; label: string; href: string };
+  employers: EarlierEmployer[];
+};
+
+export const earlierGroups: EarlierGroup[] = [
   {
-    company: 'Sulaco Technology',
-    positions: [{ title: 'Senior Developer', dates: 'WxC transfer – July 2015' }],
-    seeAlso: { label: 'Development work listed under One New Zealand', href: '#one-new-zealand' },
+    dates: '2004 – 2015',
+    employers: [
+      {
+        company: 'Sulaco Technology',
+        positions: [{ title: 'Senior Developer', dates: 'WxC transfer – July 2015' }],
+        seeAlso: { label: 'Development work listed under One New Zealand', href: '#one-new-zealand' },
+      },
+      {
+        company: 'WXC Communications',
+        positions: [
+          { title: 'Junior Developer', dates: '2005 – transfer to Sulaco' },
+          { title: 'Senior Technical Support Representative', dates: '2004 – 2005' },
+        ],
+      },
+    ],
+    continuation: {
+      text: 'I continued as a developer at One NZ (then Vodafone NZ) after it acquired the combined WxC and Sulaco business in 2015.',
+      label: 'See One NZ',
+      href: '#one-new-zealand',
+    },
   },
   {
-    company: 'WXC Communications',
-    positions: [
-      { title: 'Junior Developer', dates: '2005 – transfer to Sulaco' },
-      { title: 'Senior Technical Support Representative', dates: '2004 – 2005' },
+    employers: [
+      { company: 'iHug', positions: [{ title: 'Technical Support Representative', dates: '2003 – 2004' }] },
     ],
   },
-  {
-    company: 'iHug',
-    positions: [{ title: 'Technical Support Representative', dates: '2003 – 2004' }],
-  },
 ];
+
+export const earlierRoles = earlierGroups.flatMap(({ employers }) => employers);
 
 export const skills: { group: string; items: string }[] = [
   { group: 'Programming', items: 'C#/.NET · Python · SQL · Go · TypeScript · Rust · C++ · Java · Kotlin · Delphi' },
