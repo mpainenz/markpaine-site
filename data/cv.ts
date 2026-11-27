@@ -39,6 +39,7 @@ export const experience: Job[] = [
     bullets: [
       'Wrote application code for Bandit’s desktop client, React/TypeScript staff and customer portals, and C#/.NET and Python backend services.',
       'Led engineering work in small project teams within an Agile environment, allocating tasks, reviewing code and providing technical feedback while coordinating delivery with business stakeholders. Mentored and onboarded colleagues through practical guidance and show-and-tell sessions introducing engineering concepts and capabilities.',
+      'Worked with product owners from planning and requirements through design, implementation, testing, deployment and production support.',
       'Owned the architecture, maintenance and operation of Bandit’s AWS environment, helping evolve the platform from self-hosted client/server systems into containerised microservices and serverless components. Deployed services on ECS/Fargate and migrated large production databases.',
       'Designed and developed Bandit’s product and service billing functionality for different plans and billing models, including monthly recurring charges, variable charges and pro rata billing.',
       'Developed customer accounting and finance functionality, including ledger and transaction tables, invoicing, refunds, partial payments allocated across invoices, account transfers and reconciliation. Built financial and product reporting for finance teams and management.',
@@ -46,7 +47,7 @@ export const experience: Job[] = [
       'Contributed substantial code to the separate .NET call-rating and Python number-portability engines. Bandit processed millions of call records each month.',
       'Developed and supported carrier-grade VoIP and SIP integrations with platforms including BroadSoft and Ribbon SBCs. These services supported complex enterprise voice and contact-centre environments, including connectivity to customer SIP endpoints, for organisations such as IRD, BNZ, NZ Police and IAG.',
       'Wrote and supported Bandit’s call-routing management service end to end. Its REST API translated requests from the application backend into carrier switch configuration changes, with retries that rechecked actual switch state and rollback using SQL Server configuration history.',
-      'Worked with product owners from planning and requirements through design, implementation, testing, deployment and production support. Built GitLab delivery workflows with automated regression checks, approval-gated releases and support for Windows container workloads.',
+      'Built GitLab delivery workflows with automated regression checks, approval-gated releases and support for Windows and Linux container workloads.',
       'Built Cisco Meraki integrations for device procurement and SD-WAN provisioning, and AWS ECS services for enterprise telematics.',
       'Partnered with Microsoft to build a multi-tenant Azure IoT management platform using IoT Hub, Event Hubs and Service Bus.',
       'Worked with One NZ’s wholesale team to design and build a GCP-backed platform integration enabling customers to use Starlink and wireless connectivity through IoT devices.',

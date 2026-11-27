@@ -81,7 +81,7 @@ function sheet(data,theme,index,type,main){
 export function signalDocumentHTML(data,theme,type){
  let pages;
  if(type==='cv'){
-  const contour=theme.id==='signal-contour', split=contour?9:10;
+  const contour=theme.id==='signal-contour', split=10;
   const first=(contour?profile(data,data.contourProfile):'')+section('Experience')+job(data.experience[0],{links:contour})+(contour?'':job(data.experience[1],{end:0}));
   const second=section('Experience')+job(data.experience[1],{end:split,continued:!contour,links:contour});
   const third=section('Experience')+job(data.experience[1],{start:split,continued:true,links:contour})+section('Independent work')+job(data.experience[2],{links:contour});
